@@ -1,0 +1,45 @@
+git init (Cria um repositório Git local na pasta onde você está)
+
+git add . (Adiciona todas as alterações de todos os arquivos para a área de staging.
+É como separar os arquivos que você vai incluir no próximo commit) ou git add arquivo.extensão
+
+git commit -m "Mensagem do commit" (Registra no histórico do Git tudo que você adicionou.
+O commit é como uma "foto" do estado atual do seu código)
+
+git branch -M main (Renomeia a branch atual para main.
+Antes, o Git criava a branch principal como master. Hoje a convenção é main.)
+OBS: Quando criamos o repositório no github ele vem com o branch Master.
+O comando -M renomeia para o novo padrão que é main.
+Branch nada mais é do que uma linha do tempo, vc pode criar varias paralelas.
+
+git remote add origin https://github.com/... (Diz ao Git que o repositório remoto (no GitHub) 
+está nesse endereço. Você está ligando o repositório local ao repositório do GitHub)
+
+git push -u origin main (Envia (push) seus commits locais para o GitHub, na branch main)
+origin = nome dado ao repositório remoto.
+
+main = branch para onde você está mandando.
+origin = nome dado ao repositório remoto.
+
+main = branch para onde você está mandando.
+- origin = nome dado ao repositório remoto.
+- main = branch para onde você está mandando.
+- -u = cria o vínculo padrão, assim da próxima vez você pode só usar git push.
+
+Depois da primeira vez
+git add .
+git commit -m "Mensagem"
+git push
+
+Mudando de linha do tempo (branch)
+
+git branch NomeDaBranch (Cria uma nova branch)
+git checkout NomeDaBranch (Muda para a nova branch)
+git checkout -b NomeDaBranch (Comando que junta os 2 comandos anteriores em 1 só)
+git add .
+git commit -m "Alteração para nova branch"
+git push -u origin NomeDaBranch
+
+📌 Diferença importante:
+git branch -M nome → renomeia a branch atual.
+git checkout -b nome → cria uma branch nova a partir da atual.
