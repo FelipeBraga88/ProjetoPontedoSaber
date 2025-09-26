@@ -1,23 +1,26 @@
 <?php
 
+include_once "CursosService.php" ;
+include_once "util.php" ;
+
 if (@$_GET["url"]) {
     
     $url = explode("/", @$_GET["url"]);
-    //http://localhost/ProjetoPontedoSaber/API/index.php
-    
-    if($url[0] === "API") {
+    //http://localhost/ProjetoPontedoSaber/API/api/cursos/
+        
+    if($url[0] === "api") {
         array_shift($url);
         
         $service = ucfirst($url[0])."Service";
         array_shift($url);
         
         $method = strtolower($_SERVER["REQUEST_METHOD"]);
-        echo "Service: $service, Method: $method";
-        echo "Method: " . $method . "<br><br>" ;
-        //ver qual a diferença entre esses 2 echo de cima.
+        echo "Service: $service, Method: $method"."<br>";
+        //echo "Service: " . $service . "<br>" ;
+        //echo "Method: " . $method . "<br>" ;
 
         try {
-            $response = call_user_func_array(array(new $service, $method), $url);
+            $response = call_user_func_array( array( new $service, $method ), $url );
             http_response_code(200);
             echo FormatarMensagemJson($response["erro"], $response["mensagem"], $response["dados"]);
 

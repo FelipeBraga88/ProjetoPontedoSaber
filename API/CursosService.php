@@ -2,7 +2,7 @@
 
     include_once "Cursos.php";
 
-    class AlunosService { //Criação dos métodos GET, POST, PUT e DELETE
+    class CursosService { //Criação dos métodos GET, POST, PUT e DELETE
 
         public function get ($idCurso = null) {
             if ( $idCurso ) {            
@@ -24,7 +24,7 @@
 
         public function put ( $idCurso = null ) {
            if ($idCurso == null) {
-                throw new Exception("Falta o código");
+                throw new Exception("Falta o codigo");
             }
 
             //Pegar os dados no formato JSON para gravar no banco de dados
@@ -38,9 +38,9 @@
 
         public function delete ( $idCurso = null ) {
             if ($idCurso == null) {
-                throw new Exception("Falta o código");
+                throw new Exception("Falta o codigo");
             }
-            return Cursos::deletar( $id );
+            return Cursos::deletar( $idCurso );
         }
 
     }

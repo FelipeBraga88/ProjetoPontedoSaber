@@ -66,7 +66,7 @@ require_once "config.php";
         } else {
             return [
                 'erro' => true,
-                'mensagem' => "Curso não cadastrado!",
+                'mensagem' => "Curso nao cadastrado!",
                 'dados' => []
             ];
         }
@@ -93,7 +93,7 @@ require_once "config.php";
         } else {
             return [
                 'erro' => true,
-                'mensagem' => 'Não há cursos cadastrados!',
+                'mensagem' => 'Nao ha cursos cadastrados!',
                 'dados' => []
             ];
         }

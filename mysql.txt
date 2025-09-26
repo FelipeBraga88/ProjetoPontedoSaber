@@ -1,0 +1,63 @@
+CREATE DATABASE pontedosaber;
+
+USE pontedosaber;
+
+CREATE TABLE Instituicao (
+    cnpj VARCHAR(18) PRIMARY KEY,
+    razao_Inst VARCHAR(150) NOT NULL,
+    email_Inst VARCHAR(150) NOT NULL,
+    telefone_Inst VARCHAR(20),
+    cep_Inst VARCHAR(10),
+    endereco_Inst VARCHAR(150),
+    num_end_Inst VARCHAR(10),
+    cidade_Inst VARCHAR(60),
+    estado_Inst VARCHAR(60),
+    pais_Inst VARCHAR(40),
+    senha_Inst VARCHAR(30) NOT NULL,
+    data_cad_Inst DATE NOT NULL
+);
+
+CREATE TABLE Estudante (
+    cpf VARCHAR(14) PRIMARY KEY,
+    nome_Estd VARCHAR(150) NOT NULL,
+    idade_Estd INT NOT NULL,
+    email_Estd VARCHAR(150) NOT NULL,
+    telefone_Estd VARCHAR(20),
+    cep_Estd VARCHAR(10),
+    endereco_Estd VARCHAR(150),
+    num_end_Estd VARCHAR(10),
+    cidade_Estd VARCHAR(60),
+    estado_Estd CHAR(60),
+    pais_Estd VARCHAR(40),
+    senha_Estd VARCHAR(30) NOT NULL,
+    data_cad_Estd DATE NOT NULL
+);
+
+CREATE TABLE Curso (
+    id_Curso varchar(20) PRIMARY KEY,
+    nome_Curso VARCHAR(150) NOT NULL,
+    descricao VARCHAR(255),
+    img BLOB,
+    local_Curso VARCHAR(150),
+    endereco_Curso VARCHAR(150),
+    cep_Curso VARCHAR(10),
+    num_end_Curso VARCHAR(10),
+    cidade_Curso VARCHAR(60),
+    estado_Curso CHAR(60),
+    data_inicio DATE,
+    data_fim DATE,
+    status_inscricao VARCHAR(20),
+    faixa_etaria VARCHAR(20),
+    cnpj_Instituicao VARCHAR(18), 
+    FOREIGN KEY (cnpj_Instituicao) REFERENCES Instituicao(cnpj)
+);
+
+CREATE TABLE Inscricao (
+    id_Inscricao VARCHAR(20) PRIMARY KEY,
+    data_Inscricao DATE NOT NULL,
+    status_Inscricao VARCHAR(150),
+    cpf_Estudante VARCHAR(14),
+    id_Curso_Inscr VARCHAR(20),
+    FOREIGN KEY (cpf_Estudante) REFERENCES Estudante(cpf),
+    FOREIGN KEY (id_Curso_Inscr) REFERENCES Curso(id_Curso)
+);
