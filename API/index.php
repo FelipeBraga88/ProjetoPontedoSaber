@@ -3,8 +3,9 @@
 if (@$_GET["url"]) {
     
     $url = explode("/", @$_GET["url"]);
+    //http://localhost/ProjetoPontedoSaber/API/index.php
     
-    if($url[0] === "api") {
+    if($url[0] === "API") {
         array_shift($url);
         
         $service = ucfirst($url[0])."Service";
