@@ -1,23 +1,26 @@
 <?php
 
 include_once "CursosService.php" ;
+include_once "EstudanteService.php" ;
 include_once "util.php" ;
 
 if (@$_GET["url"]) {
     
     $url = explode("/", @$_GET["url"]);
-    //http://localhost/ProjetoPontedoSaber/API/api/cursos/
+    //http://localhost/ProjetoPontedoSaber/API/api/Cursos/
+    //http://localhost/ProjetoPontedoSaber/API/api/Estudante/
+    //http://localhost/ProjetoPontedoSaber/API/api/Empresa/
+    //http://localhost/ProjetoPontedoSaber/API/api/Matricula/
         
     if($url[0] === "api") {
         array_shift($url);
         
         $service = ucfirst($url[0])."Service";
         array_shift($url);
-        
-        $method = strtolower($_SERVER["REQUEST_METHOD"]);
-        echo "Service: $service, Method: $method"."<br>";
-        //echo "Service: " . $service . "<br>" ;
-        //echo "Method: " . $method . "<br>" ;
+
+        //ucfirst= deixa a primeira letra maiuscula e strtolower = deixa o resto minusculo
+        $method = ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
+        echo "Service: $service <br> Method: $method <br><br>";
 
         try {
             $response = call_user_func_array( array( new $service, $method ), $url );
