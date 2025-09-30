@@ -101,11 +101,10 @@ require_once "config.php";
         $tabela = "estudante";
         $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-        $sql = "UPDATE $tabela SET cpf = :cpf, nome_Estd = :nome_Estd, idade_Estd = :idade_Estd, email_Estd = :email_Estd, telefone_Estd = :telefone_Estd, cep_Estd = :cep_Estd, endereco_Estd = :endereco_Estd, num_end_Estd = :num_end_Estd, cidade_Estd = :cidade_Estd, estado_Estd = :estado_Estd, pais_Estd = :pais_Estd, senha_Estd = :senha_Estd, data_cad_Estd = :data_cad_Estd WHERE cpf = :cpf";
+        $sql = "UPDATE $tabela SET nome_Estd = :nome_Estd, idade_Estd = :idade_Estd, email_Estd = :email_Estd, telefone_Estd = :telefone_Estd, cep_Estd = :cep_Estd, endereco_Estd = :endereco_Estd, num_end_Estd = :num_end_Estd, cidade_Estd = :cidade_Estd, estado_Estd = :estado_Estd, pais_Estd = :pais_Estd, senha_Estd = :senha_Estd, data_cad_Estd = :data_cad_Estd WHERE cpf = :cpf";
 
         //Trocar o apelido pela informação
         $stm = $conexao->prepare($sql);
-        $stm->bindValue(":cpf", $dados["cpf"]);
         $stm->bindValue(":nome_Estd", $dados["nome_Estd"]);
         $stm->bindValue(":idade_Estd", $dados["idade_Estd"]);
         $stm->bindValue(":email_Estd", $dados["email_Estd"]);
@@ -118,6 +117,7 @@ require_once "config.php";
         $stm->bindValue(":pais_Estd", $dados["pais_Estd"]);
         $stm->bindValue(":senha_Estd", $dados["senha_Estd"]);
         $stm->bindValue(":data_cad_Estd", $dados["data_cad_Estd"]);
+        $stm->bindValue(":cpf", $cpf);
         
         $stm->execute();
 

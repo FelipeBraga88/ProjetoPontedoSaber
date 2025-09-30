@@ -6,9 +6,9 @@
 
         public function get ($cpf = null) {
             if ( $cpf ) {            
-                return Estudante::buscarEstudantePeloId( $cpf ); //A consulta será feita pelo código do curso            
+                return Estudante::buscarEstudantePeloId( $cpf ); //A consulta será feita pelo código do Estudante
             } else {              
-                return Estudante::buscarTodosEstudantes(); //A consulta será de TODOS os cursos             
+                return Estudante::buscarTodosEstudantes(); //A consulta será de TODOS os estudantes            
             }
         }
 

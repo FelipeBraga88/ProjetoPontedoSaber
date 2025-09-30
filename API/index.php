@@ -2,17 +2,19 @@
 
 include_once "CursosService.php" ;
 include_once "EstudanteService.php" ;
+include_once "InstituicaoService.php" ;
+include_once "InscricaoService.php" ;
 include_once "util.php" ;
 
 if (@$_GET["url"]) {
     
     $url = explode("/", @$_GET["url"]);
-    //http://localhost/ProjetoPontedoSaber/API/api/Cursos/
-    //http://localhost/ProjetoPontedoSaber/API/api/Estudante/
-    //http://localhost/ProjetoPontedoSaber/API/api/Empresa/
-    //http://localhost/ProjetoPontedoSaber/API/api/Matricula/
+    //http://localhost/ProjetoPontedoSaber/API/1/Cursos/
+    //http://localhost/ProjetoPontedoSaber/API/1/Estudante/
+    //http://localhost/ProjetoPontedoSaber/API/1/Instituicao/
+    //http://localhost/ProjetoPontedoSaber/API/1/Inscricao/
         
-    if($url[0] === "api") {
+    if($url[0] === "1") {
         array_shift($url);
         
         $service = ucfirst($url[0])."Service";
