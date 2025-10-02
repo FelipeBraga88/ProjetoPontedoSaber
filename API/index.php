@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 
 include_once "CursosService.php" ;
 include_once "EstudanteService.php" ;
@@ -22,7 +23,9 @@ if (@$_GET["url"]) {
 
         //ucfirst= deixa a primeira letra maiuscula e strtolower = deixa o resto minusculo
         $method = ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
-        echo "Service: $service <br> Method: $method <br><br>";
+        //echo "Service: $service " ;
+        //echo "Method: $method " ;
+
 
         try {
             $response = call_user_func_array( array( new $service, $method ), $url );
@@ -36,12 +39,10 @@ if (@$_GET["url"]) {
         }
 
     } else {
-        echo "<br>";
         echo "EndPoint incorreto.";
     }
 
 } else {
-    echo "<br>";
     echo "Nenhum EndPoint foi informado.";
 
 }
