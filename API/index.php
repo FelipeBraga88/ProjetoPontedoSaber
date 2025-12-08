@@ -6,6 +6,7 @@ include_once "EstudanteService.php" ;
 include_once "InstituicaoService.php" ;
 include_once "InscricaoService.php" ;
 include_once "util.php" ;
+header("Access-Control-Allow-Origin: *");
 
 if (@$_GET["url"]) {
     
@@ -23,9 +24,9 @@ if (@$_GET["url"]) {
 
         //ucfirst= deixa a primeira letra maiuscula e strtolower = deixa o resto minusculo
         $method = ucfirst(strtolower($_SERVER["REQUEST_METHOD"])); 
-        //echo "Service: $service " ;
+        //echo "Service: $service / " ;
         //echo "Method: $method " ;
-
+        //echo PHP_EOL;
 
         try {
             $response = call_user_func_array( array( new $service, $method ), $url );

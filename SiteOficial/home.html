@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Ponte do Saber</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body style="background-color: antiquewhite;">
+    <h2>Trazer dados do Database para uma tabela</h2>
+    <div id="container">
+        <table>
+            <thead>
+                <tr style="background-color: lightgray;">
+                    <td>CPF</td>
+                    <td>Nome</td>
+                    <td>Idade</td>
+                    <td>Email</td>
+                    <td>Telefone</td>
+                </tr>
+            </thead>
+            <tbody id="tabelaDados" style="background-color: tomato;">
+                <!-- Dados serão inseridos aqui via jQuery -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        //Boa prática: garante que a página carrega antes de executar a função
+        $(document).ready(function(){
+            carregaDados();
+        });
+        function carregaDados(){
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Estudante/',
+                method: 'GET',
+                dataType: 'json',
+                
+                success: function(resposta){
+                    const tabela = $('#tabelaDados');
+                    console.log(resposta); //Exibe os dados no console do navegador
+
+                    if (resposta.erro){
+                        tabela.append('<tr><td colspan="5">Erro ao carregar os dados</td></tr>');
+                    } else if (resposta.length === 0){
+                        tabela.append('<tr><td colspan="5">Nenhum curso encontrado</td></tr>');
+                    } else {
+                        resposta.dados.forEach(function(item){
+                            const linha = `<tr>
+                                <td>${item.cpf}</td>
+                                <td>${item.nome_Estd}</td>
+                                <td>${item.idade_Estd}</td>
+                                <td>${item.email_Estd}</td>
+                                <td>${item.telefone_Estd}</td>
+                            </tr>`;
+                            tabela.append(linha);
+                        });
+                    }
+                },
+                error: function(erro){
+                    console.log('Erro ao carregar os dados:', erro);
+                    $('#tabelaDados').html('<tr><td colspan="5">Erro ao carregar os dados</td></tr>');
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>
