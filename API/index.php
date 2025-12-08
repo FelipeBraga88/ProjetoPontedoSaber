@@ -6,7 +6,11 @@ include_once "EstudanteService.php" ;
 include_once "InstituicaoService.php" ;
 include_once "InscricaoService.php" ;
 include_once "util.php" ;
+header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Access-Control-Allow-Headers: *");
 
 if (@$_GET["url"]) {
     
