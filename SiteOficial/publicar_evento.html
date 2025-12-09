@@ -6,9 +6,9 @@
     <title>Publicar Novo Evento - Ponte do Saber</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-light">
-
     <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
@@ -27,9 +27,7 @@
             </div>
         </div>
     </nav>
-
     <div class="container pb-5">
-
         <div class="p-5 rounded-top-5 text-white position-relative overflow-hidden mb-0" 
              style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
             <div class="row align-items-center">
@@ -42,22 +40,20 @@
                 </div>
             </div>
         </div>
-
         <div class="bg-secondary bg-opacity-10 p-4 p-md-5 rounded-bottom-5">
+            <!--Div para alerta dos erros do form-->
+            <div id="alertaEvento"></div>
             <form action="portal_instituicao.html">
-                <div class="row g-4">
-                    
-                    <div class="col-lg-8">
-                        
+                <div class="row g-4">                   
+                    <div class="col-lg-8">                        
                         <div class="mb-4">
-                            <label class="fw-bold text-secondary ms-3 mb-1">Título do Evento/Curso</label>
-                            <input type="text" class="form-control rounded-pill p-3 border-0" placeholder="Ex: Workshop de Robótica">
+                            <label for="nome_Curso" class="fw-bold text-secondary ms-3 mb-1">Título do Evento/Curso</label>
+                            <input type="text" id="nome_Curso" class="form-control rounded-pill p-2 border-0" placeholder="Ex: Workshop de Robótica">
                         </div>
-
                         <div class="row mb-4">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <label class="fw-bold text-secondary ms-3 mb-1">Categoria</label>
-                                <select class="form-select rounded-pill p-3 border-0 text-secondary" style="cursor: pointer;">
+                                <label for="categoria_Curso" class="fw-bold text-secondary ms-3 mb-1">Categoria</label>
+                                <select id="categoria_Curso" class="form-select rounded-pill p-2 border-0 text-secondary" style="cursor: pointer;">
                                     <option selected>Selecione...</option>
                                     <option value="1">Curso</option>
                                     <option value="2">Evento</option>
@@ -67,77 +63,206 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="fw-bold text-secondary ms-3 mb-1">Modalidade</label>
-                                <select class="form-select rounded-pill p-3 border-0 text-secondary" style="cursor: pointer;">
+                                <label for="modalidade_Curso" class="fw-bold text-secondary ms-3 mb-1">Modalidade</label>
+                                <select id="modalidade_Curso" class="form-select rounded-pill p-2 border-0 text-secondary" style="cursor: pointer;">
                                     <option selected>Online</option>
                                     <option value="1">Presencial</option>
                                     <option value="2">Híbrido</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="mb-4">
-                            <label class="fw-bold text-secondary ms-3 mb-1">Descrição Detalhada</label>
-                            <textarea class="form-control rounded-4 p-3 border-0" rows="5" placeholder="Descreva o conteúdo, público-alvo e objetivos..."></textarea>
+                            <label for="descricao" class="fw-bold text-secondary ms-3 mb-1">Descrição Detalhada</label>
+                            <textarea id="descricao" class="form-control rounded-4 p-2 border-0" rows="5" placeholder="Descreva o conteúdo, público-alvo e objetivos..."></textarea>
                         </div>
-
                         <div class="row mb-4">
-                            <div class="col-md-4 mb-3 mb-md-0">
-                                <label class="fw-bold text-secondary ms-3 mb-1">Data Início</label>
-                                <input type="date" class="form-control rounded-pill p-3 border-0 text-secondary">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <label for="data_inicio" class="fw-bold text-secondary ms-3 mb-1">Data Início</label>
+                                <input type="date" id="data_inicio" class="form-control rounded-pill p-2 border-0 text-secondary">
                             </div>
-                            <div class="col-md-4 mb-3 mb-md-0">
-                                <label class="fw-bold text-secondary ms-3 mb-1">Horário</label>
-                                <input type="time" class="form-control rounded-pill p-3 border-0 text-secondary">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <label for="hora_inicio" class="fw-bold text-secondary ms-3 mb-1">Horário</label>
+                                <input type="time" id="hora_inicio" class="form-control rounded-pill p-2 border-0 text-secondary">
                             </div>
-                            <div class="col-md-4">
-                                <label class="fw-bold text-secondary ms-3 mb-1">Vagas</label>
-                                <input type="number" class="form-control rounded-pill p-3 border-0" placeholder="00">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <label for="vagas_Curso" class="fw-bold text-secondary ms-3 mb-1">Vagas</label>
+                                <input type="number" id="vagas_Curso" class="form-control rounded-pill p-2 border-0" placeholder="00">
+                            </div>
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <label for="duracao_Curso" class="fw-bold text-secondary ms-3 mb-1">Duração</label>
+                                <input type="text" id="duracao_Curso" class="form-control rounded-pill p-2 border-0" placeholder="Meses">
                             </div>
                         </div>
-
+                        <div class="mb-4">
+                            <label for="endereco_Curso" class="fw-bold text-secondary ms-3 mb-1">Endereço</label>
+                            <input type="text" id="endereco_Curso" class="form-control rounded-pill p-2 border-0" placeholder="Endereço completo do evento (rua, número, cidade, estado)">
+                        </div>
                     </div>
-
-                    <div class="col-lg-4">
-                        
-                        <div class="mb-4 h-50">
-                            <label class="fw-bold text-secondary ms-3 mb-1">Banner de Capa</label>
-                            <div class="bg-white rounded-4 h-100 d-flex flex-column align-items-center justify-content-center p-4 text-secondary text-center border border-dashed border-secondary border-opacity-25" style="min-height: 250px; cursor: pointer;">
+                    <div class="col-lg-4">                     
+                        <div class="mb-5 h-50">
+                            <label for="img" class="fw-bold text-secondary ms-3 mb-1">Banner de Capa</label>
+                            <div id="img" class="bg-white rounded-4 h-100 d-flex flex-column align-items-center justify-content-center p-4 text-secondary text-center border border-dashed border-secondary border-opacity-25" style="min-height: 250px; cursor: pointer;">
                                 <i class="bi bi-cloud-arrow-up-fill display-4 text-primary mb-2"></i>
                                 <span class="fw-bold">Clique para enviar a imagem</span>
                                 <small class="opacity-75">JPG ou PNG (Max 5mb)</small>
                             </div>
                         </div>
-
                         <div class="mb-4">
-                            <label class="fw-bold text-secondary ms-3 mb-1">Local / Link</label>
-                            <input type="text" class="form-control rounded-4 p-3 border-0 mb-2" placeholder="Endereço completo ou Link da sala">
+                            <label for="link_Sala" class="fw-bold text-secondary ms-3 mb-1">Link da Sala Virtual</label>
+                            <input type="text" id="link_Sala" class="form-control rounded-4 p-2 border-0 mb-2" placeholder="Digite o link da sala">
                             <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" id="certificadoCheck">
-                                <label class="form-check-label text-secondary small fw-bold" for="certificadoCheck">
+                                <input id="certificadoCheck" class="form-check-input" type="checkbox">
+                                <label for="certificadoCheck" class="form-check-label text-secondary small fw-bold">
                                     Haverá emissão de certificado?
                                 </label>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="d-flex justify-content-end align-items-center gap-3 mt-4 pt-4 border-top border-secondary border-opacity-25">
                     <a href="portal_instituicao.html" class="btn btn-link text-secondary text-decoration-none fw-bold">
                         Cancelar
                     </a>
                     
-                    <button type="submit" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow hover-effect">
+                    <button type="button" id="btCadastrarEvento" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow hover-effect">
                         <i class="bi bi-check-circle-fill me-2"></i> PUBLICAR AGORA
                     </button>
                 </div>
-
             </form>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btCadastrarEvento').on('click', function(){
+                inserirEvento();
+            });
+        });
+
+        //Mostrar erros da validação
+        function mostrarErro(mensagem) {
+            $('#alertaEvento').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+        };
+
+        function formatarData(data) {
+            // Separar a data (dia, mês e ano) no formato DD/MM/YYYY
+            const partes = data.split('/');
+            if (partes.length === 3) {
+                const dia = partes[0];
+                const mes = partes[1];
+                const ano = partes[2];
+
+                // Retornar no formato YYYY-MM-DD
+                return `${ano}-${mes}-${dia}`;
+            }
+            return data; // Caso a data não tenha o formato correto, retorna ela como está
+        }
+
+        function inserirEvento() {
+            //Validações dos campos
+            let nome     = $('#nome_Curso').val().trim();
+            let categoria = $('#categoria_Curso').val();
+            let modalidade = $('#modalidade_Curso').val();
+            let descricao = $('#descricao').val().trim();
+            let dataInicio = $('#data_inicio').val();
+            let horaInicio = $('#hora_inicio').val();
+            let vagas    = $('#vagas_Curso').val().trim();
+            let duracao  = $('#duracao_Curso').val().trim();
+            let endereco = $('#endereco_Curso').val().trim();
+
+            if(nome === "" || nome.length < 6){
+                mostrarErro("Nome muito curto!");
+                return;
+            }
+            if(categoria === "Selecione..."){
+                mostrarErro("Selecione uma categoria!");
+                return;
+            }
+            if(modalidade === "Selecione..."){
+                mostrarErro("Selecione uma modalidade!");
+                return;
+            }
+            if(descricao === "" || descricao.length < 20){
+                mostrarErro("Descrição muito curta!");
+                return;
+            }
+            if(dataInicio === ""){
+                mostrarErro("Selecione uma data de início!");
+                return;
+            }
+            if(horaInicio === ""){
+                mostrarErro("Selecione um horário de início!");
+                return;
+            }
+            if(vagas === "" || isNaN(vagas) || parseInt(vagas) <= 0){
+                mostrarErro("Número de vagas inválido!");
+                return;
+            }
+            if(duracao === "" || duracao.length < 2){
+                mostrarErro("Duração inválida!");
+                return;
+            }
+            if(endereco === "" || endereco.length < 10){
+                mostrarErro("Endereço incompleto!");
+                return;
+            }
+
+            // Converter a data para o formato YYYY-MM-DD antes de enviar
+            dataInicio = formatarData(dataInicio);
+
+            const dadosEvento = {
+                nome_Curso: $('#nome_Curso').val(),
+                categoria_Curso: $('#categoria_Curso').val(),
+                modalidade_Curso: $('#modalidade_Curso').val(),
+                descricao: $('#descricao').val(),
+                data_inicio: dataInicio,
+                hora_inicio: $('#hora_inicio').val(),
+                vagas_Curso: $('#vagas_Curso').val(),
+                duracao_Curso: $('#duracao_Curso').val(),
+                endereco_Curso: $('#endereco_Curso').val(),
+                link_Sala: $('#link_Sala').val(),
+                //campos que serão enviados como NULL
+                img: "",
+                status_inscricao: "",
+                cnpj_Instituicao: "11.111.111/1111-11" // Substituir pelo CNPJ real da instituição parceira logada
+            };
+
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Cursos/',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dadosEvento),
+
+                success: function(resposta){
+                    let alerta = '';
+                    if (resposta.erro){
+                        alerta = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${resposta.mensagem}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                    } else {
+                        alerta = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${resposta.mensagem}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        // Limpar o formulário após sucesso
+                        $('form')[0].reset();
+                    }
+                    $('#alertaEvento').html(alerta);
+                },
+                error: function(erro){
+                    $('#alertaEvento').html('<div class="alert alert-danger" role="alert">Erro ao comunicar com a API</div>');
+                    console.log('Erro na requisição:', erro);
+                }
+            });
+        };
+    </script>
 </body>
 </html>

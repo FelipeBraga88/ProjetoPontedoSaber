@@ -34,20 +34,19 @@ CREATE TABLE Estudante (
 );
 
 CREATE TABLE Curso (
-    id_Curso varchar(20) PRIMARY KEY,
+    id_Curso INT PRIMARY KEY AUTO_INCREMENT,
     nome_Curso VARCHAR(150) NOT NULL,
     descricao VARCHAR(255),
+    categoria_Curso VARCHAR(255),
+    modalidade_Curso VARCHAR(255),
     img BLOB,
-    local_Curso VARCHAR(150),
+    link_Sala VARCHAR(150),
     endereco_Curso VARCHAR(150),
-    cep_Curso VARCHAR(10),
-    num_end_Curso VARCHAR(10),
-    cidade_Curso VARCHAR(60),
-    estado_Curso CHAR(60),
     data_inicio DATE,
-    data_fim DATE,
+    hora_inicio TIME,
+    duracao_Curso VARCHAR(150),
+    vagas_Curso INT,
     status_inscricao VARCHAR(20),
-    faixa_etaria VARCHAR(20),
     cnpj_Instituicao VARCHAR(18), 
     FOREIGN KEY (cnpj_Instituicao) REFERENCES Instituicao(cnpj)
 );
@@ -57,7 +56,7 @@ CREATE TABLE Inscricao (
     data_Inscricao DATE NOT NULL,
     status_Inscricao VARCHAR(150),
     cpf_Estudante VARCHAR(14),
-    id_Curso_Inscr VARCHAR(20),
+    id_Curso_Inscr INT,
     FOREIGN KEY (cpf_Estudante) REFERENCES Estudante(cpf),
     FOREIGN KEY (id_Curso_Inscr) REFERENCES Curso(id_Curso)
 );

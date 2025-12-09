@@ -8,23 +8,21 @@ require_once "config.php";
             $tabela = "curso";
             $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-            $sql = "INSERT INTO $tabela (id_Curso, nome_Curso, descricao, img, local_Curso, endereco_Curso, cep_Curso, num_end_Curso, cidade_Curso, estado_Curso, data_inicio, data_fim, status_inscricao, faixa_etaria, cnpj_Instituicao) VALUES (:id_Curso, :nome_Curso, :descricao, :img, :local_Curso, :endereco_Curso, :cep_Curso, :num_end_Curso, :cidade_Curso, :estado_Curso, :data_inicio, :data_fim, :status_inscricao, :faixa_etaria, :cnpj_Instituicao)";
+            $sql = "INSERT INTO $tabela (nome_Curso, descricao, categoria_Curso, modalidade_Curso, img, link_Sala, endereco_Curso, data_inicio, hora_inicio, duracao_Curso, vagas_Curso, status_inscricao, cnpj_Instituicao) VALUES (:nome_Curso, :descricao, :categoria_Curso, :modalidade_Curso, :img, :link_Sala, :endereco_Curso, :data_inicio, :hora_inicio, :duracao_Curso, :vagas_Curso, :status_inscricao, :cnpj_Instituicao)";
 
             $stm = $conexao->prepare($sql);
-            $stm->bindValue(":id_Curso", $dados["id_Curso"]);
             $stm->bindValue(":nome_Curso", $dados["nome_Curso"]);
             $stm->bindValue(":descricao", $dados["descricao"]);
+            $stm->bindValue(":categoria_Curso", $dados["categoria_Curso"]);
+            $stm->bindValue(":modalidade_Curso", $dados["modalidade_Curso"]);
             $stm->bindValue(":img", $dados["img"]);
-            $stm->bindValue(":local_Curso", $dados["local_Curso"]);
+            $stm->bindValue(":link_Sala", $dados["link_Sala"]);
             $stm->bindValue(":endereco_Curso", $dados["endereco_Curso"]);
-            $stm->bindValue(":cep_Curso", $dados["cep_Curso"]);
-            $stm->bindValue(":num_end_Curso", $dados["num_end_Curso"]);
-            $stm->bindValue(":cidade_Curso", $dados["cidade_Curso"]);
-            $stm->bindValue(":estado_Curso", $dados["estado_Curso"]);
             $stm->bindValue(":data_inicio", $dados["data_inicio"]);
-            $stm->bindValue(":data_fim", $dados["data_fim"]);
+            $stm->bindValue(":hora_inicio", $dados["hora_inicio"]);
+            $stm->bindValue(":duracao_Curso", $dados["duracao_Curso"]);
+            $stm->bindValue(":vagas_Curso", $dados["vagas_Curso"]);
             $stm->bindValue(":status_inscricao", $dados["status_inscricao"]);
-            $stm->bindValue(":faixa_etaria", $dados["faixa_etaria"]);
             $stm->bindValue(":cnpj_Instituicao", $dados["cnpj_Instituicao"]);
             
             $stm->execute();
@@ -103,23 +101,22 @@ require_once "config.php";
         $tabela = "curso";
         $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-        $sql = "UPDATE $tabela SET nome_Curso = :nome_Curso, descricao = :descricao, img = :img, local_Curso = :local_Curso, endereco_Curso = :endereco_Curso, cep_Curso = :cep_Curso, num_end_Curso = :num_end_Curso, cidade_Curso = :cidade_Curso, estado_Curso = :estado_Curso, data_inicio = :data_inicio, data_fim = :data_fim, status_inscricao = :status_inscricao, faixa_etaria = :faixa_etaria, cnpj_Instituicao = :cnpj_Instituicao WHERE id_Curso = :id_Curso";       
+        $sql = "UPDATE $tabela SET nome_Curso = :nome_Curso, descricao = :descricao,  categoria_Curso = :categoria_Curso, modalidade_Curso = :modalidade_Curso, img = :img, link_Sala = :link_Sala, endereco_Curso = :endereco_Curso, data_inicio = :data_inicio, hora_inicio = :hora_inicio, duracao_Curso = :duracao_Curso, vagas_Curso = :vagas_Curso, status_inscricao = :status_inscricao, cnpj_Instituicao = :cnpj_Instituicao WHERE id_Curso = :id_Curso";
 
         //Trocar o apelido pela informação
         $stm = $conexao->prepare($sql);
         $stm->bindValue(":nome_Curso", $dados["nome_Curso"]);
         $stm->bindValue(":descricao", $dados["descricao"]);
+        $stm->bindValue(":categoria_Curso", $dados["categoria_Curso"]);
+        $stm->bindValue(":modalidade_Curso", $dados["modalidade_Curso"]);
         $stm->bindValue(":img", $dados["img"]);
-        $stm->bindValue(":local_Curso", $dados["local_Curso"]);
+        $stm->bindValue(":link_Sala", $dados["link_Sala"]);
         $stm->bindValue(":endereco_Curso", $dados["endereco_Curso"]);
-        $stm->bindValue(":cep_Curso", $dados["cep_Curso"]);
-        $stm->bindValue(":num_end_Curso", $dados["num_end_Curso"]);
-        $stm->bindValue(":cidade_Curso", $dados["cidade_Curso"]);
-        $stm->bindValue(":estado_Curso", $dados["estado_Curso"]);
         $stm->bindValue(":data_inicio", $dados["data_inicio"]);
-        $stm->bindValue(":data_fim", $dados["data_fim"]);
+        $stm->bindValue(":hora_inicio", $dados["hora_inicio"]);
+        $stm->bindValue(":duracao_Curso", $dados["duracao_Curso"]);
+        $stm->bindValue(":vagas_Curso", $dados["vagas_Curso"]);
         $stm->bindValue(":status_inscricao", $dados["status_inscricao"]);
-        $stm->bindValue(":faixa_etaria", $dados["faixa_etaria"]);
         $stm->bindValue(":cnpj_Instituicao", $dados["cnpj_Instituicao"]);
         $stm->bindValue(":id_Curso", $idCurso);
         
