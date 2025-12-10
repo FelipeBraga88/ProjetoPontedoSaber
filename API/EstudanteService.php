@@ -43,6 +43,13 @@
             return Estudante::deletar( $cpf );
         }
 
-    }
+        public function login() {
+            $dados = json_decode(file_get_contents("php://input"), true, 512);
+            if ($dados == null || !isset($dados["email_Estd"]) || !isset($dados["senha_Estd"])) {
+                throw new Exception("Falta o email ou senha para login");
+            }
+            return Estudante::validarLogin($dados["email_Estd"], $dados["senha_Estd"]);
 
+        }
+    }
 ?>

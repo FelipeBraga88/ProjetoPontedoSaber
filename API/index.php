@@ -12,6 +12,28 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Access-Control-Allow-Headers: *");
 
+// Permitir CORS e preflight
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+//Rota exclusiva para o login
+if (strtolower(@$_GET["url"]) === "1/login") {
+    try {
+        $service = new EstudanteService();
+        $response = $service->login();
+        http_response_code(200);
+        echo FormatarMensagemJson($response["erro"], $response["mensagem"], $response["dados"]);
+
+    } catch ( Exception $erro ) {
+        http_response_code(500);
+        echo FormatarMensagemJson(true, $erro -> getMessage(), []);
+
+    }
+    exit;
+}
+
 if (@$_GET["url"]) {
     
     $url = explode("/", @$_GET["url"]);

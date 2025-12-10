@@ -6,9 +6,9 @@
     <title>Login - Ponte do Saber</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-light">
-
     <nav class="navbar navbar-expand-lg bg-white py-3">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
@@ -17,64 +17,54 @@
             </a>
         </div>
     </nav>
-
-    <div class="container d-flex align-items-center justify-content-center" style="min-height: 85vh;">
-        
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 85vh;">        
         <div class="card border-0 shadow-lg rounded-5 overflow-hidden w-100" style="max-width: 1000px;">
-            <div class="row g-0">
-                
-                <div class="col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center p-5 text-white text-center" 
-                     style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
-                    
+            <div class="row g-0">                
+                <div class="col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center p-5 text-white text-center" style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">                    
                     <div class="mb-4">
                         <i class="bi bi-rocket-takeoff-fill display-1 opacity-75"></i>
                     </div>
                     <h2 class="fw-bold mb-3">Bem-vindo de volta!</h2>
                     <p class="fs-5 opacity-75">Conecte-se para continuar sua jornada de aprendizado ou gerenciar seus cursos.</p>
-                    
                     <div class="mt-4">
                         <small class="d-block mb-2 opacity-50">Ainda não tem uma conta?</small>
                         <a href="cadastro_estudante.html" class="btn btn-outline-light rounded-pill px-4 fw-bold">Criar conta agora</a>
                     </div>
                 </div>
-
                 <div class="col-lg-6 p-5 bg-white">
                     <div class="d-flex flex-column h-100 justify-content-center">
-                        
                         <div class="text-center mb-4">
                             <h3 class="fw-bold text-primary">Acesse sua conta</h3>
                             <p class="text-secondary small">Estudantes e Instituições parceiras</p>
                         </div>
-
-                        <form>
+                        <div id="alertaLogin"></div>
+                        <form id="loginForm">
                             <div class="mb-3">
-                                <label class="fw-bold text-secondary small ms-3 mb-1">E-mail</label>
+                                <label for="email_Login" class="fw-bold text-secondary small ms-3 mb-1">E-mail</label>
                                 <div class="input-group">
                                     <span class="input-group-text rounded-start-pill bg-light border-0 ps-3">
                                         <i class="bi bi-envelope text-primary"></i>
                                     </span>
-                                    <input type="email" class="form-control rounded-end-pill bg-light border-0 p-3" placeholder="seu@email.com">
+                                    <input type="email" id="email_Login" class="form-control rounded-end-pill bg-light border-0 p-3" placeholder="seu@email.com">
                                 </div>
                             </div>
-
                             <div class="mb-3">
-                                <label class="fw-bold text-secondary small ms-3 mb-1">Senha</label>
+                                <label for="senha_Login" class="fw-bold text-secondary small ms-3 mb-1">Senha</label>
                                 <div class="input-group">
                                     <span class="input-group-text rounded-start-pill bg-light border-0 ps-3">
                                         <i class="bi bi-lock text-primary"></i>
                                     </span>
-                                    <input type="password" class="form-control rounded-end-pill bg-light border-0 p-3" placeholder="••••••••">
+                                    <input type="password" id="senha_Login" class="form-control rounded-end-pill bg-light border-0 p-3" placeholder="••••••••">
                                 </div>
                                 <div class="text-end mt-1">
                                     <a href="#" class="text-decoration-none small text-secondary fw-bold">Esqueceu a senha?</a>
                                 </div>
                             </div>
-
                             <div class="mb-4 d-flex justify-content-center">
                                 <div class="bg-light border rounded-3 p-3 d-flex align-items-center shadow-sm" style="width: 100%; max-width: 300px;">
                                     <div class="form-check m-0 d-flex align-items-center">
-                                        <input class="form-check-input p-3 border-2" type="checkbox" id="captchaCheck" style="cursor: pointer;">
-                                        <label class="form-check-label ms-2 small text-secondary fw-medium" for="captchaCheck" style="cursor: pointer;">
+                                        <input id="captchaCheck" class="form-check-input p-3 border-2" type="checkbox" style="cursor: pointer;">
+                                        <label for="captchaCheck" class="form-check-label ms-2 small text-secondary fw-medium"  style="cursor: pointer;">
                                             Não sou um robô
                                         </label>
                                     </div>
@@ -84,18 +74,14 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow hover-effect" 
+                            <button type="button" id="btLogin" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow hover-effect" 
                                     style="background: linear-gradient(90deg, #4a69bd, #0d1b8a); border: none;">
                                 ENTRAR
                             </button>
-
                         </form>
-
                         <div class="d-lg-none text-center mt-4">
                             <p class="small text-secondary">Ainda não tem conta? <a href="cadastro_estudante.html" class="fw-bold text-primary text-decoration-none">Cadastre-se</a></p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -103,5 +89,100 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btLogin').on('click', function(){
+                consultarLogin();
+            });
+        });
+
+        //Mostrar erros da validação
+        function mostrarErro(mensagem) {
+            $('#alertaLogin').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+        }
+
+        function consultarLogin() {
+            //Validações dos campos
+            let email   = $('#email_Login').val().trim();
+            let senha   = $('#senha_Login').val().trim();
+            let termos  = $('#captchaCheck').is(':checked');
+
+            if(!email.includes("@") || !email.includes(".")){
+                mostrarErro("Digite um e-mail válido.");
+                return;
+            }
+            if(senha.length < 6){
+                mostrarErro("A senha deve ter pelo menos 6 caracteres.");
+                return;
+            }
+            if(!termos){
+                mostrarErro("Você deve realizar o captcha!");
+                return;
+            }
+
+            const dadosLogin = {
+                email_Estd: $('#email_Login').val(),
+                senha_Estd: $('#senha_Login').val(),
+            };
+
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/login',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dadosLogin),
+
+                success: function(resposta) {   
+                    let alerta = '';
+                    if(resposta.erro){
+                        alerta = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    ${resposta.mensagem}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>`;
+                    } else {
+                        alerta = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${resposta.mensagem}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        //Salvar os dados do estudante na sessão
+                        localStorage.setItem('estudanteLogado', JSON.stringify(resposta.dados));
+                        //Limpar o formulário
+                        $('#loginForm')[0].reset();
+                        //Redirecionar para a página inicial após 1 segundos
+                        setTimeout(function(){
+                            window.location.href = 'index.html';
+                        }, 500);
+                    }
+                    $('#alertaLogin').html(alerta);
+                },
+                error: function(erro){
+                    $('#alertaLogin').html('<div class="alert alert-danger" role="alert">Erro ao comunicar com a API</div>');
+                    console.log('Erro na requisição:', erro);
+                }
+            });
+        };
+        /* Função para logout usar em outras paginas:
+        function logout() {
+            localStorage.removeItem("estudanteLogado");
+            window.location.href = "login.html";
+        }
+        Recuperar dados do estudante logado:
+        function getEstudanteLogado() {
+            const estudanteJSON = localStorage.getItem("estudanteLogado");
+            return estudanteJSON ? JSON.parse(estudanteJSON) : null;
+        }
+            ou a de cima ou a de baixo, verificar depois
+            const usuario = JSON.parse(localStorage.getItem("estudanteLogado"));
+
+            Exibir o nome do usuário na página
+            document.getElementById("nomeUsuario").textContent = usuario.nome_Estd;
+        */
+
+    </script>
 </body>
 </html>

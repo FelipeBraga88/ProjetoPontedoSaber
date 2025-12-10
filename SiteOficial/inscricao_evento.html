@@ -6,9 +6,9 @@
     <title>Inscrição - Curso XPTO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-light">
-
     <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
@@ -22,117 +22,98 @@
                     <li class="nav-item">
                         <a class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="#">Entrar/Cadastrar</a>
                     </li>
+                    <!--Botão de logout(novo)-->
+                    <li class="nav-item">
+                        <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                            Sair
+                        </button>
+                    </li>                    
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container pb-5">
-
         <div class="p-4 rounded-4 text-white mb-4" style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
-            <h2 class="fw-bold mb-3">Curso XPTO</h2>
-            
+            <h2 id="trazer_nomeCurso" class="fw-bold mb-3">Nome do curso...</h2>            
             <div class="row g-4">
                 <div class="col-lg-7">
                     <div class="bg-secondary bg-opacity-10 rounded-4 w-100 h-100 overflow-hidden" style="min-height: 300px;">
                         <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Capa do Curso">
                     </div>
                 </div>
-
-                <div class="col-lg-5">
-                    
-                    <label class="fw-bold mb-1">Descrição</label>
-                    <div class="bg-white bg-opacity-75 text-dark rounded-3 p-3 mb-3" style="min-height: 120px; font-size: 0.9rem;">
-                        Texto, texto, texto, texto, texto, texto, texto, texto, texto, texto.
-                        Texto, texto, texto, texto, texto, texto.
+                <div class="col-lg-5">                    
+                    <label for="trazer_descricao" class="fw-bold mb-1">Descrição</label>
+                    <div id="trazer_descricao" class="bg-white bg-opacity-75 text-dark rounded-3 p-2 mb-4" style="min-height: 120px; font-size: 0.9rem;">
+                        Descrição do evento...
                     </div>
-
-                    <label class="fw-bold mb-1">Prazo final para inscrição</label>
-                    <div class="text-white fs-4 fw-bold text-center py-2 rounded-3 mb-3 shadow-sm" style="background-color: #f39c12;">
-                        28/10/2025
+                    <label for="trazer_dataCurso" class="fw-bold mb-1">Início do Curso:</label>
+                    <div class="text-white fs-4 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                        DD/MM/AAAA
                     </div>
-
                     <div class="row g-2">
                         <div class="col-6">
-                            <label class="fw-bold small mb-1 w-100 text-center">Vagas abertas</label>
-                            <div class="text-white fs-4 fw-bold text-center py-2 rounded-3 shadow-sm" style="background-color: #f39c12;">
-                                1550
+                            <label for="trazer_vagas" class="fw-bold small mb-1 w-100 text-center">Vagas abertas:</label>
+                            <div id="trazer_vagas" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                                XXX
                             </div>
                         </div>
                         <div class="col-6">
-                            <label class="fw-bold small mb-1 w-100 text-center">Vagas preenchidas</label>
-                            <div class="text-white fs-4 fw-bold text-center py-2 rounded-3 shadow-sm" style="background-color: #f39c12;">
-                                844
+                            <label for="trazer_duracao" class="fw-bold small mb-1 w-100 text-center">Duração:</label>
+                            <div id="trazer_duracao" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                                XX horas
                             </div>
                         </div>
                     </div>
-
+                    <label for="trazer_endereco" class="fw-bold small mb-1 w-100 text-center">Localização:</label>
+                    <div class="text-white fs-5 fw-bold text-center py-1 rounded-3 shadow-sm" style="background-color: #f39c12;">
+                        DD/MM/AAAA
+                    </div>
                 </div>
             </div>
         </div>
-
         <div class="bg-secondary bg-opacity-25 p-4 rounded-4 mb-5">
-            <h4 class="fw-bold text-warning mb-4">Inscrição</h4>
-            
+            <h4 class="fw-bold text-warning mb-5">INSCRIÇÃO</h4>
+            <div id="alertaInscricao"></div>
             <form action="index.html">
-                <div class="row g-3 mb-3">
-                    <div class="col-md-9">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Nome</label>
-                        <input type="text" class="form-control rounded-pill p-3 border-0">
+                <div class="row g-3 mb-5">
+                    <div class="col-md-7">
+                        <label for="nome_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Nome:</label>
+                        <input id="nome_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cpf_Inscricao" class="fw-bold text-secondary ps-2 mb-1">CPF:</label>
+                        <input id="cpf_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="idade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Idade:</label>
+                        <input id="idade_Inscricao" type="number" class="form-control rounded-pill p-2 border-0" readonly>
+                    </div>
+                </div>
+                <div class="row g-3 mb-5">
+                    <div class="col-md-6">
+                        <label for="email_Inscricao" class="fw-bold text-secondary ps-2 mb-1">E-mail:</label>
+                        <input id="email_Inscricao" type="email" class="form-control rounded-pill p-2 border-0" readonly>
                     </div>
                     <div class="col-md-3">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Idade</label>
-                        <input type="number" class="form-control rounded-pill p-3 border-0">
+                        <label for="telefone_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Telefone:</label>
+                        <input id="telefone_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="modalidade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Modalidade:</label>
+                        <input id="modalidade_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
                     </div>
                 </div>
-
-                <div class="row g-3 mb-3">
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary ps-2 mb-1">CPF</label>
-                        <input type="text" class="form-control rounded-pill p-3 border-0">
-                    </div>
-                    <div class="col-md-8">
-                        <label class="fw-bold text-secondary ps-2 mb-1">E-mail</label>
-                        <input type="email" class="form-control rounded-pill p-3 border-0">
-                    </div>
-                </div>
-
-                <div class="row g-3 mb-3">
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Selecione:</label>
-                        <select class="form-select rounded-pill p-3 border-0 text-secondary text-center fw-bold">
-                            <option selected>Online</option>
-                            <option value="1">Presencial</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Telefone:</label>
-                        <input type="text" class="form-control rounded-pill p-3 border-0">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Data:</label>
-                        <input type="date" class="form-control rounded-pill p-3 border-0 text-secondary">
-                    </div>
-                </div>
-
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary ps-2 mb-1">Selecione:</label>
-                        <select class="form-select rounded-pill p-3 border-0 text-secondary text-center fw-bold">
-                            <option selected>Turma "A" (09h00)</option>
-                            <option value="1">Turma "B" (14h00)</option>
-                        </select>
-                    </div>
-                    
+                <br>
+                <div class="row g-3 align-items-end">                                      
                     <div class="col-md-8">
                         <div class="d-flex flex-wrap justify-content-end align-items-center gap-4">
                             <div class="form-check">
-                                <input class="form-check-input p-2" type="checkbox" id="terms">
-                                <label class="form-check-label small fw-bold text-secondary" for="terms">
+                                <input class="form-check-input p-2" type="checkbox" id="termosInscricao" value="">
+                                <label class="form-check-label small fw-bold text-secondary" for="termosInscricao">
                                     Aceito os <a href="#" class="text-primary text-decoration-none">Termos de uso</a>
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow text-uppercase" 
+                            <button type="button" id="btInscricao" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow text-uppercase" 
                                     style="background-color: #58d613; border: none; min-width: 200px; color: #1a4d03;">
                                 Inscrever
                             </button>
@@ -141,7 +122,6 @@
                 </div>
             </form>
         </div>
-
         <h5 class="fw-bold text-secondary mb-3">Veja outros cursos</h5>
         <div class="row g-3">
             <div class="col-md-4">
@@ -161,9 +141,94 @@
                 </a>
             </div>
         </div>
-
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btInscricao').on('click', function(){
+                inserirInscricao();
+            });
+            $('#btLogout').on('click', function(){
+                logout();
+            });
+
+            // Recuperar os dados do estudante logado do localStorage
+            const estudanteLogado = JSON.parse(localStorage.getItem('estudanteLogado'));
+            console.log(estudanteLogado);
+
+            //Função para preencher os dados da inscrição
+            if (estudanteLogado) {
+                $('#nome_Inscricao').val(estudanteLogado.nome_Estd);
+                $('#cpf_Inscricao').val(estudanteLogado.cpf);
+                $('#idade_Inscricao').val(estudanteLogado.idade_Estd);
+                $('#email_Inscricao').val(estudanteLogado.email_Estd);
+                $('#telefone_Inscricao').val(estudanteLogado.telefone_Estd);
+            } else {
+                // Se não houver estudante logado, redirecionar para a página de login
+                window.location.href = 'login.html';
+            }
+
+        });
+
+        //Mostrar erros da validação
+        function mostrarErro(mensagem) {
+            $('#alertaInscricao').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+        }
+
+        function inserirInscricao() {
+            //Verificar se os termos foram aceitos
+            let termos   = $('#termosInscricao').is(':checked');
+            if(!termos){
+                mostrarErro("Você deve aceitar os Termos de uso!");
+                return;
+            }
+            
+            const dadosInscricao = {
+                data_Inscricao: new Date().toISOString().split('T')[0],
+                cpf_Estudante: $('#cpf_Inscricao').val(),
+                id_Curso_Inscr:"", //ID do curso a ser inscrito (deve ser definido conforme o curso selecionado)    
+                //campos que serão enviados como NULL
+                status_Inscricao: "",
+            };
+
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Inscricao/',
+                method: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(dadosInscricao),
+                
+                success: function(resposta){
+                    let alerta = '';
+                    if (resposta.erro){
+                        alerta = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${resposta.mensagem}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                    } else {
+                        alerta = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            ${resposta.mensagem}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                    }
+                    $('#alertaInscricao').html(alerta);
+                },
+                error: function(erro){
+                    $('#alertaInscricao').html('<div class="alert alert-danger" role="alert">Erro ao comunicar com a API</div>');
+                    console.log('Erro na requisição:', erro);
+                }
+            });
+        };
+
+        function logout() {
+            localStorage.removeItem("estudanteLogado");
+            window.location.href = "login.html";
+        }   
+    </script>
 </body>
 </html>

@@ -2,45 +2,45 @@
 
 require_once "config.php";
 
-    class Estudante { //Criação dos métodos para manipulação do banco de dados
-        public static function inserir( $dados ) {
+class Estudante { //Criação dos métodos para manipulação do banco de dados
+    public static function inserir( $dados ) {
 
-            $tabela = "estudante";
-            $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
+        $tabela = "estudante";
+        $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-            $sql = "INSERT INTO $tabela (cpf, nome_Estd, idade_Estd, email_Estd, telefone_Estd, cep_Estd, endereco_Estd, num_end_Estd, cidade_Estd, estado_Estd, pais_Estd, senha_Estd, data_cad_Estd) VALUES (:cpf, :nome_Estd, :idade_Estd, :email_Estd, :telefone_Estd, :cep_Estd, :endereco_Estd, :num_end_Estd, :cidade_Estd, :estado_Estd, :pais_Estd, :senha_Estd, :data_cad_Estd)";
+        $sql = "INSERT INTO $tabela (cpf, nome_Estd, idade_Estd, email_Estd, telefone_Estd, cep_Estd, endereco_Estd, num_end_Estd, cidade_Estd, estado_Estd, pais_Estd, senha_Estd, data_cad_Estd) VALUES (:cpf, :nome_Estd, :idade_Estd, :email_Estd, :telefone_Estd, :cep_Estd, :endereco_Estd, :num_end_Estd, :cidade_Estd, :estado_Estd, :pais_Estd, :senha_Estd, :data_cad_Estd)";
 
-            $stm = $conexao->prepare($sql);
-            $stm->bindValue(":cpf", $dados["cpf"]);
-            $stm->bindValue(":nome_Estd", $dados["nome_Estd"]);
-            $stm->bindValue(":idade_Estd", $dados["idade_Estd"]);
-            $stm->bindValue(":email_Estd", $dados["email_Estd"]);
-            $stm->bindValue(":telefone_Estd", $dados["telefone_Estd"]);
-            $stm->bindValue(":cep_Estd", $dados["cep_Estd"]);
-            $stm->bindValue(":endereco_Estd", $dados["endereco_Estd"]);
-            $stm->bindValue(":num_end_Estd", $dados["num_end_Estd"]);
-            $stm->bindValue(":cidade_Estd", $dados["cidade_Estd"]);
-            $stm->bindValue(":estado_Estd", $dados["estado_Estd"]);
-            $stm->bindValue(":pais_Estd", $dados["pais_Estd"]);
-            $stm->bindValue(":senha_Estd", $dados["senha_Estd"]);
-            $stm->bindValue(":data_cad_Estd", $dados["data_cad_Estd"]);
-            
-            $stm->execute();
+        $stm = $conexao->prepare($sql);
+        $stm->bindValue(":cpf", $dados["cpf"]);
+        $stm->bindValue(":nome_Estd", $dados["nome_Estd"]);
+        $stm->bindValue(":idade_Estd", $dados["idade_Estd"]);
+        $stm->bindValue(":email_Estd", $dados["email_Estd"]);
+        $stm->bindValue(":telefone_Estd", $dados["telefone_Estd"]);
+        $stm->bindValue(":cep_Estd", $dados["cep_Estd"]);
+        $stm->bindValue(":endereco_Estd", $dados["endereco_Estd"]);
+        $stm->bindValue(":num_end_Estd", $dados["num_end_Estd"]);
+        $stm->bindValue(":cidade_Estd", $dados["cidade_Estd"]);
+        $stm->bindValue(":estado_Estd", $dados["estado_Estd"]);
+        $stm->bindValue(":pais_Estd", $dados["pais_Estd"]);
+        $stm->bindValue(":senha_Estd", $dados["senha_Estd"]);
+        $stm->bindValue(":data_cad_Estd", $dados["data_cad_Estd"]);
+        
+        $stm->execute();
 
-            if ( $stm->rowCount() > 0 ) {
-                return [
-                    'erro' => false,
-                    'mensagem' => 'Estudante registrado com sucesso!',
-                    'dados' => []
-                ];
-            } else {
-                return [
-                    'erro' => true,
-                    'mensagem' => 'Erro ao registrar estudante!',
-                    'dados' => []
-                ];
-            }
+        if ( $stm->rowCount() > 0 ) {
+            return [
+                'erro' => false,
+                'mensagem' => 'Estudante registrado com sucesso!',
+                'dados' => []
+            ];
+        } else {
+            return [
+                'erro' => true,
+                'mensagem' => 'Erro ao registrar estudante!',
+                'dados' => []
+            ];
         }
+    }
 
     public static function buscarEstudantePeloCpf( $cpf ) {
 
@@ -162,6 +162,35 @@ require_once "config.php";
             return [
                 'erro' => true,
                 'mensagem' => 'Erro ao deletar dados!',
+                'dados' => []
+            ];
+        }
+    }
+
+    //Criar uma função para realizar o login
+    public static function validarLogin( $email, $senha ) {
+        $tabela = "estudante";
+        $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
+
+        $sql = "SELECT * FROM $tabela WHERE email_Estd = :email_Estd AND senha_Estd = :senha_Estd";
+
+        $stm = $conexao->prepare( $sql );
+        $stm->bindValue(":email_Estd", $email);
+        $stm->bindValue(":senha_Estd", $senha);
+
+        $stm->execute();
+
+        if ( $stm->rowCount() > 0 ) {
+            $valores = $stm->fetch(PDO::FETCH_ASSOC);        
+            return [
+                'erro' => false,
+                'mensagem' => "Login realizado com sucesso!",
+                'dados' => $valores
+            ];
+        } else {
+            return [
+                'erro' => true,
+                'mensagem' => "Email ou senha incorretos!",
                 'dados' => []
             ];
         }
