@@ -55,39 +55,55 @@
                 Cadastre-se como ONG Parceira
             </a>
         </div>
-        <div class="row row-cols-2 row-cols-md-5 g-3 mb-5 px-3">
+        <div class="row row-cols-2 row-cols-md-5 g-3 mb-2 px-3">
             <div class="col">
-                <div class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
+                <div id="filtroEvento" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
                     style="background-color: #8c9eff; height: 50px; cursor: pointer;">
                     Eventos
                 </div>
             </div>
             <div class="col">
-                <div class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
+                <div id="filtroCurso" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
                     style="background-color: #8c9eff; height: 50px; cursor: pointer;">
                     Cursos
                 </div>
             </div>
             <div class="col">
-                <div class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
+                <div id="filtroBootCamp" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
                     style="background-color: #8c9eff; height: 50px; cursor: pointer;">
                     BootCamp
                 </div>
             </div>
             <div class="col">
-                <div class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
+                <div id="filtroPalestra" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
                     style="background-color: #8c9eff; height: 50px; cursor: pointer;">
                     Palestras
                 </div>
             </div>
             <div class="col">
-                <div class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
+                <div id="filtroWorkshop" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold" 
                     style="background-color: #8c9eff; height: 50px; cursor: pointer;">
-                    Online
+                    Workshops
                 </div>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">            
+        <div class="row g-3 mb-4 px-3"> <!-- Arrumar layout NOVO FILTRO -->
+            <div class="col-md-3">
+                <label for="filtroModalidade" class="fw-bold text-secondary">Filtrar Modalidade: </label>
+                <select id="filtroModalidade" class="form-select rounded-pill border-0 text-secondary" style="cursor: pointer;">
+                    <option selected>Selecione...</option>
+                    <option value="Online">Online</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Híbrido">Híbrido</option>
+                </select>
+            </div>
+            <div class="d-flex justify-content-end align-items-center w-75">
+                <button id="filtroTodos" class="btn btn-outline-secondary rounded-pill fw-bold">
+                    Limpar Filtros
+                </button>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5" hidden>
             <div class="col">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
                     <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
@@ -143,6 +159,9 @@
                 </div>
             </div>
         </div>
+        <div id="containerCursos" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            <!--Cursos serão inseridos aqui via jQuery-->
+        </div>
         <br>
     </div>
     <footer style="background-color: #0d1b8a; height: 75px;">
@@ -154,10 +173,114 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let listaCursos = [];
+        let filtroCategoria = "Todos";
+        let filtroModalidade = "";
+
+        //Função para converter a data do banco de dados de AAAA-MM-DD em DD/MM/AAAA no card do curso
+        function formatarData(dataISO) {
+            if (!dataISO) return "";
+
+            const partes = dataISO.split("-");
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+
+            return `${dia}/${mes}/${ano}`;
+        };
+
+        // Função para renderizar os cards
+        function renderizarCards(lista) {
+            const containerCursos = $('#containerCursos');
+            containerCursos.empty();
+
+            lista.forEach(function(item){
+                const cardCurso = `
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
+                                <img src="${item.img || 'Imagens/Capa_Curso.png'}" class="object-fit-cover w-100 h-100" alt="Capa do Curso">
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">${item.categoria_Curso}</span>
+                                    <span class="small text-secondary fw-bold">
+                                        <i class="bi bi-calendar me-1"></i>${formatarData(item.data_inicio)}
+                                    </span>
+                                </div>
+                                <h4 class="card-title fw-bold text-dark mb-2">${item.nome_Curso}</h4>
+                                <p class="card-text text-secondary small">${item.descricao}</p>
+                                <a href="inscricao_evento.html?id=${item.id_Curso}" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-3">
+                                    Ver Detalhes e Inscrever-se
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                containerCursos.append(cardCurso);
+            });
+        }
+
+        // Função combinada para filtrar
+        function aplicarFiltros() {
+            let filtrados = listaCursos;
+
+            // Filtra por categoria
+            if(filtroCategoria.toLowerCase() !== "todos") {
+                filtrados = filtrados.filter(item => item.categoria_Curso.toLowerCase() === filtroCategoria.toLowerCase());
+            }
+
+            // Filtra por modalidade
+            if(filtroModalidade !== "" && filtroModalidade !== "Selecione...") {
+                filtrados = filtrados.filter(item => item.modalidade_Curso === filtroModalidade);
+            }
+
+            // Se não houver cursos após o filtro
+            if(filtrados.length === 0){
+                $('#containerCursos').html(`<p class="w-100 text-center text-secondary py-4">
+                    Nenhum curso encontrado para este filtro!
+                </p>`);
+            } else {
+                renderizarCards(filtrados);
+            }
+        }
+
         $(document).ready(function(){
             $('#btLogout').on('click', function(){
                 logout();
             });
+            $("#filtroEvento").on('click', function(){
+                filtroCategoria = "Evento";
+                aplicarFiltros();
+            });
+            $("#filtroCurso").on('click', function(){
+                filtroCategoria = "Curso";
+                aplicarFiltros();
+            });
+            $("#filtroBootCamp").on('click', function(){
+                filtroCategoria = "BootCamp";
+                aplicarFiltros();
+            });
+            $("#filtroPalestra").on('click', function(){
+                filtroCategoria = "Palestra";
+                aplicarFiltros();
+            });
+            $("#filtroWorkshop").on('click', function(){
+                filtroCategoria = "Workshop";
+                aplicarFiltros();
+            });
+            $("#filtroTodos").on('click', function(){
+                filtroCategoria = "Todos"; 
+                filtroModalidade = ""; 
+                $("#filtroModalidade").val("Selecione...");
+                aplicarFiltros(); 
+            });
+            // Evento do select de modalidade
+            $('#filtroModalidade').on('change', function(){
+                filtroModalidade = $(this).val();
+                aplicarFiltros();
+            });
+
 
             // Recuperar os dados do estudante logado do localStorage
             const estudanteLogado = JSON.parse(localStorage.getItem('estudanteLogado'));
@@ -169,7 +292,42 @@
             } else {
                 $('#btLogout').hide();
             };
+            carregarCursos();
         });
+
+        //Talvez depois posso fazer o código de mostrar erro de validação se for ter
+        function mostrarErro(mensagem) {
+            $('#alertaIndex').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+        }
+
+        function carregarCursos() {
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Cursos/',
+                method: 'GET',
+                dataType: 'json',
+
+                success: function(resposta){
+                    if (resposta.erro){
+                        containerCursos.html('<p class="text-center text-secondary py-4">Erro ao carregar os dados</p>');
+                    } else if (resposta.length === 0){
+                        containerCursos.html('<p class="text-center text-secondary py-4">Nenhum curso encontrado</p>');
+                    } else {
+                        listaCursos = resposta.dados.sort((a,b) => new Date(a.data_inicio) - new Date(b.data_inicio));
+                    // Renderiza todos inicialmente
+                    renderizarCards(listaCursos);
+                    }
+                },
+                error: function(erro){
+                    console.log('Erro ao carregar os cursos:', erro);
+                    $('#containerCursos').html('<p class="text-center text-secondary py-4">Erro ao carregar os cursos</p>');
+                }
+            });
+        }
 
         function logout() {
             localStorage.removeItem("estudanteLogado");
