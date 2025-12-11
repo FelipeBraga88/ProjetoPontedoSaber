@@ -55,6 +55,24 @@ if (@$_GET["url"]) {
         //echo PHP_EOL;
 
         try {
+            // --- ROTA NOVA ESPECIAL DE INSCRICAO/VERIFICAR ---
+            if ($service === "InscricaoService" && isset($url[0]) && $url[0] === "verificar") {
+
+                $cpf = $url[1] ?? null;
+                $idCurso = $url[2] ?? null;
+
+                if (!$cpf || !$idCurso) {
+                    throw new Exception("É necessário informar CPF e ID do curso.");
+                }
+
+                $serviceObj = new InscricaoService();
+                $response = $serviceObj->verificar($cpf, $idCurso);
+
+                http_response_code(200);
+                echo FormatarMensagemJson($response["erro"], $response["mensagem"], $response["dados"]);
+                exit;
+            }
+
             $response = call_user_func_array( array( new $service, $method ), $url );
             http_response_code(200);
             echo FormatarMensagemJson($response["erro"], $response["mensagem"], $response["dados"]);

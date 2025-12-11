@@ -3,15 +3,42 @@
 require_once "config.php";
 
     class Inscricao { //Criação dos métodos para manipulação do banco de dados
+        public static function verificarInscrito($cpf, $idCurso) {
+
+            $tabela = "inscricao";
+            $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
+
+            $sql = "SELECT * FROM $tabela WHERE cpf_Estudante = :cpf AND id_Curso_Inscr = :idCurso";
+
+            $stm = $conexao->prepare($sql);
+            $stm->bindValue(":cpf", $cpf);
+            $stm->bindValue(":idCurso", $idCurso);
+
+            $stm->execute();
+
+            if ($stm->rowCount() > 0) {
+                return [
+                    'erro' => false,
+                    'mensagem' => 'Usuário já está inscrito neste curso!',
+                    'dados' => $stm->fetch(PDO::FETCH_ASSOC)
+                ];
+            } else {
+                return [
+                    'erro' => true,
+                    'mensagem' => 'Nenhuma inscrição encontrada.',
+                    'dados' => []
+                ];
+            }
+        }
+
         public static function inserir( $dados ) {
 
             $tabela = "inscricao";
             $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-            $sql = "INSERT INTO $tabela (id_Inscricao, data_Inscricao, status_Inscricao, cpf_Estudante, id_Curso_Inscr) VALUES (:id_Inscricao, :data_Inscricao, :status_Inscricao, :cpf_Estudante, :id_Curso_Inscr)";
+            $sql = "INSERT INTO $tabela (data_Inscricao, status_Inscricao, cpf_Estudante, id_Curso_Inscr) VALUES (:data_Inscricao, :status_Inscricao, :cpf_Estudante, :id_Curso_Inscr)";
 
             $stm = $conexao->prepare($sql);
-            $stm->bindValue(":id_Inscricao", $dados["id_Inscricao"]);
             $stm->bindValue(":data_Inscricao", $dados["data_Inscricao"]);
             $stm->bindValue(":status_Inscricao", $dados["status_Inscricao"]);
             $stm->bindValue(":cpf_Estudante", $dados["cpf_Estudante"]);

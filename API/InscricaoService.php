@@ -18,8 +18,18 @@
             if ($dados == null) {
                 throw new Exception("Falta os dados para incluir");
             }
+            
+            // Função nova para verificar se o estudante já está inscrito neste curso
+            $verificacao = Inscricao::verificarInscrito($dados['cpf_Estudante'], $dados['id_Curso_Inscr']);
+            if (!$verificacao['erro']) {
+                // Se erro = false, significa que já existe inscrição
+                return [
+                    'erro' => true,
+                    'mensagem' => 'Você já está inscrito neste curso!',
+                    'dados' => []
+                ];
+            }
             return Inscricao::inserir( $dados );
-
         }
 
         public function put ( $id_Inscricao = null ) {
@@ -43,6 +53,10 @@
             return Inscricao::deletar( $id_Inscricao );
         }
 
+        //Função nova criada para verificar se o estudante ja está inscrito em determinado curso!
+        public function verificar($cpf, $idCurso) {
+            return Inscricao::verificarInscrito($cpf, $idCurso);
+        }
     }
 
 ?>

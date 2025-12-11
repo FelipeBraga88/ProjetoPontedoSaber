@@ -17,12 +17,12 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navContent">
                 <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item"><a class="nav-link text-dark fw-medium" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a></li>
                     <li class="nav-item">
-                        <a class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="#">Entrar/Cadastrar</a>
+                        <a class="nav-link text-dark fw-medium" href="index.html">Início</a>
                     </li>
-                    <!--Botão de logout(novo)-->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
+                    </li>
                     <li class="nav-item">
                         <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
                             Sair
@@ -34,7 +34,8 @@
     </nav>
     <div class="container pb-5">
         <div class="p-4 rounded-4 text-white mb-4" style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
-            <h2 id="trazer_nomeCurso" class="fw-bold mb-3">Nome do curso...</h2>            
+            <h2 id="trazer_nomeCurso" class="fw-bold mb-3">Nome do curso...</h2>
+            <div id="alertaCursoInscricao"></div>
             <div class="row g-4">
                 <div class="col-lg-7">
                     <div class="bg-secondary bg-opacity-10 rounded-4 w-100 h-100 overflow-hidden" style="min-height: 300px;">
@@ -47,26 +48,26 @@
                         Descrição do evento...
                     </div>
                     <label for="trazer_dataCurso" class="fw-bold mb-1">Início do Curso:</label>
-                    <div class="text-white fs-4 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                    <div id="trazer_dataCurso" class="text-white fs-4 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
                         DD/MM/AAAA
                     </div>
                     <div class="row g-2">
                         <div class="col-6">
                             <label for="trazer_vagas" class="fw-bold small mb-1 w-100 text-center">Vagas abertas:</label>
                             <div id="trazer_vagas" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
-                                XXX
+                                0
                             </div>
                         </div>
                         <div class="col-6">
                             <label for="trazer_duracao" class="fw-bold small mb-1 w-100 text-center">Duração:</label>
                             <div id="trazer_duracao" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
-                                XX horas
+                                0 horas
                             </div>
                         </div>
                     </div>
                     <label for="trazer_endereco" class="fw-bold small mb-1 w-100 text-center">Localização:</label>
-                    <div class="text-white fs-5 fw-bold text-center py-1 rounded-3 shadow-sm" style="background-color: #f39c12;">
-                        DD/MM/AAAA
+                    <div id="trazer_endereco" class="text-white fs-5 fw-bold text-center py-1 rounded-3 shadow-sm" style="background-color: #f39c12;">
+                        Sem endereço.
                     </div>
                 </div>
             </div>
@@ -144,9 +145,23 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let cursoId = null; // Variável para armazenar o ID do curso globalmente
+
+        //Função para converter a data do banco de dados de AAAA-MM-DD em DD/MM/AAAA no card do curso
+        function formatarData(dataISO) {
+            if (!dataISO) return "";
+
+            const partes = dataISO.split("-");
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+
+            return `${dia}/${mes}/${ano}`;
+        };
+
         $(document).ready(function(){
             $('#btInscricao').on('click', function(){
-                inserirInscricao();
+                verificarInscricao();
             });
             $('#btLogout').on('click', function(){
                 logout();
@@ -155,6 +170,11 @@
             // Recuperar os dados do estudante logado do localStorage
             const estudanteLogado = JSON.parse(localStorage.getItem('estudanteLogado'));
             console.log(estudanteLogado);
+
+            //Recuperar o código para carregar os dados do curso específico
+            const urlParams = new URLSearchParams(window.location.search);
+            cursoId = urlParams.get('id');
+            console.log('ID do curso:', cursoId);
 
             //Função para preencher os dados da inscrição
             if (estudanteLogado) {
@@ -168,6 +188,8 @@
                 window.location.href = 'login.html';
             }
 
+            //Carregar os dados do curso
+            carregarDadosCurso();
         });
 
         //Mostrar erros da validação
@@ -180,6 +202,64 @@
             `);
         }
 
+        function carregarDadosCurso() {
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Cursos/' + cursoId,
+                method: 'GET',
+                dataType: 'json',
+
+                success: function(resposta){
+                    if (resposta.erro){
+                        $('#alertaCursoInscricao').html(`<p class="w-100 text-center text-secondary py-4">Erro ao carregar os dados</p>`);
+                    } else if (resposta.length === 0){
+                        $('#alertaCursoInscricao').html(`<p class="w-100 text-center text-secondary py-4">Nenhum curso encontrado</p>`);
+                    } else {
+                        const curso = resposta.dados;
+                        $('#trazer_nomeCurso').text(curso.nome_Curso);
+                        $('#trazer_descricao').text(curso.descricao);
+                        $('#trazer_dataCurso').text(formatarData(curso.data_inicio));
+                        $('#trazer_vagas').text(curso.vagas_Curso);
+                        $('#trazer_duracao').text(curso.duracao_Curso);
+                        $('#trazer_endereco').text(curso.endereco_Curso);
+                        $('#modalidade_Inscricao').val(curso.modalidade_Curso);
+
+                    }
+                },
+                error: function(erro){
+                    console.log('Erro ao carregar os dados:', erro);
+                    $('#alertaCursoInscricao').html(`<p class="w-100 text-center text-secondary py-4">Erro de conexão com API</p>`);
+                }
+            });
+        }
+
+        function verificarInscricao() {
+            const cpf = $('#cpf_Inscricao').val();
+
+            $.ajax({
+                url: `http://localhost/ProjetoPontedoSaber/API/1/Inscricao/verificar/${cpf}/${cursoId}`,
+                method: 'GET',
+                dataType: 'json',
+
+                success: function(resposta) {
+                    if (resposta.inscrito === true) {
+                        $('#alertaInscricao').html(`
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                Você já está inscrito neste curso!
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        `);
+                    } else {
+                        inserirInscricao();
+                    }
+                },
+
+                error: function(erro) {
+                    $('#alertaInscricao').html(`<div class="alert alert-danger" role="alert">Erro ao verificar inscrição.</div>`);
+                    console.log('Erro ao verificar inscrição:', erro);
+                }
+            });
+        }       
+
         function inserirInscricao() {
             //Verificar se os termos foram aceitos
             let termos   = $('#termosInscricao').is(':checked');
@@ -191,9 +271,9 @@
             const dadosInscricao = {
                 data_Inscricao: new Date().toISOString().split('T')[0],
                 cpf_Estudante: $('#cpf_Inscricao').val(),
-                id_Curso_Inscr:"", //ID do curso a ser inscrito (deve ser definido conforme o curso selecionado)    
+                id_Curso_Inscr: cursoId,
                 //campos que serão enviados como NULL
-                status_Inscricao: "",
+                status_Inscricao: null,
             };
 
             $.ajax({
@@ -227,7 +307,7 @@
 
         function logout() {
             localStorage.removeItem("estudanteLogado");
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         }   
     </script>
 </body>

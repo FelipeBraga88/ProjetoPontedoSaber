@@ -26,7 +26,6 @@
                     <li class="nav-item">
                         <a id="btEntrar" class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="cadastro_estudante.html">Entrar/Cadastrar</a>
                     </li>
-                    <!--Botão de logout(novo)-->
                     <li class="nav-item">
                         <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
                             Sair
@@ -313,18 +312,18 @@
 
                 success: function(resposta){
                     if (resposta.erro){
-                        containerCursos.html('<p class="text-center text-secondary py-4">Erro ao carregar os dados</p>');
+                        containerCursos.html(`<p class="w-100 text-center text-secondary py-4">Erro ao carregar os dados</p>`);
                     } else if (resposta.length === 0){
-                        containerCursos.html('<p class="text-center text-secondary py-4">Nenhum curso encontrado</p>');
+                        containerCursos.html(`<p class="w-100 text-center text-secondary py-4">Nenhum curso encontrado</p>`);
                     } else {
                         listaCursos = resposta.dados.sort((a,b) => new Date(a.data_inicio) - new Date(b.data_inicio));
-                    // Renderiza todos inicialmente
-                    renderizarCards(listaCursos);
+                        // Renderiza todos inicialmente
+                        renderizarCards(listaCursos);
                     }
                 },
                 error: function(erro){
-                    console.log('Erro ao carregar os cursos:', erro);
-                    $('#containerCursos').html('<p class="text-center text-secondary py-4">Erro ao carregar os cursos</p>');
+                    console.log('Erro ao carregar os dados:', erro);
+                    $('#containerCursos').html(`<p class="w-100 text-center text-secondary py-4">Erro de conexão com API</p>`);
                 }
             });
         }
