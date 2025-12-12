@@ -25,7 +25,15 @@
                         <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="portal_instituicao.html">Empresa</a>
+                        </li>
+                        <li class="nav-item">
                             <a id="btEntrar" class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="login.html">Entrar/Cadastrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btConfig" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">
+                                Config
+                            </button>
                         </li>
                         <li class="nav-item">
                             <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
@@ -150,6 +158,9 @@
         $(document).ready(function(){
             $('#btLogout').on('click', function(){
                 logout();
+            });
+            $('#btConfig').on('click', function(){
+                window.location.href = "configuracoes.html";
             });
             $("#filtroEvento").on('click', function(){
                 filtroCategoria = "Evento";
