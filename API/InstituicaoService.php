@@ -43,6 +43,15 @@
             return Instituicao::deletar( $cnpj );
         }
 
+        public function login() {
+            $dados = json_decode(file_get_contents("php://input"), true, 512);
+            if ($dados == null || !isset($dados["email_Inst"]) || !isset($dados["senha_Inst"])) {
+                throw new Exception("Falta o email ou senha para login");
+            }
+            return Instituicao::validarLogin($dados["email_Inst"], $dados["senha_Inst"]);
+
+        }
+
     }
 
 ?>

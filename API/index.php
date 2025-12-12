@@ -18,18 +18,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-//Rota exclusiva para o login
+// Rota exclusiva para o login
 if (strtolower(@$_GET["url"]) === "1/login") {
     try {
-        $service = new EstudanteService();
-        $response = $service->login();
+        $dados = json_decode(file_get_contents("php://input"), true, 512);
+        if ($dados == null || !isset($dados["tipo"])) {
+            throw new Exception("Tipo de usuário não informado");
+        }
+
+        if ($dados['tipo'] === 'estudante') {
+            $service = new EstudanteService();
+            $response = $service->login();
+        } elseif ($dados['tipo'] === 'instituicao') {
+            $service = new InstituicaoService();
+            $response = $service->login();
+        } else {
+            throw new Exception("Tipo de usuário inválido");
+        }
+
         http_response_code(200);
         echo FormatarMensagemJson($response["erro"], $response["mensagem"], $response["dados"]);
 
     } catch ( Exception $erro ) {
         http_response_code(500);
-        echo FormatarMensagemJson(true, $erro -> getMessage(), []);
-
+        echo FormatarMensagemJson(true, $erro->getMessage(), []);
     }
     exit;
 }

@@ -8,105 +8,179 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navContent">
-                <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item"><a class="nav-link text-dark fw-medium" href="index.html">Início</a></li>
-                    <li class="nav-item fw-bold text-primary">Cursos</li>
-                    <li class="nav-item">
-                        <a id="btEntrar" class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="login.html">Entrar/Cadastrar</a>
-                    </li>
-                    <!--Botão de logout(novo)-->
-                    <li class="nav-item">
-                        <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
-                            Sair
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container pb-5">
-        <div class="text-center mb-5">
-            <h1 class="fw-bold text-secondary">Explore nossos <span class="text-primary">Cursos e Eventos</span></h1>
-            <p class="text-secondary opacity-75">Oportunidades presenciais e online para alavancar sua carreira</p>
-        </div>
-        <div class="d-flex justify-content-center gap-2 mb-5 flex-wrap">
-            <button class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">Todos</button>
-            <button class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Tecnologia</button>
-            <button class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Design</button>
-            <button class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Negócios</button>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-           
-            <div class="col">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
-                        <img src="Imagens/Capa_Curso.png" class="object-fit-cover w-100 h-100" alt="Capa do Curso">
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">Tecnologia</span>
-                            <span class="small text-secondary fw-bold"><i class="bi bi-calendar me-1"></i> 28/10</span>
-                        </div>
-                        <h4 class="card-title fw-bold text-dark mb-2">Curso XPTO de Robótica</h4>
-                        <p class="card-text text-secondary small">Aprenda os fundamentos da robótica com especialistas do mercado em um curso prático.</p>
-                        <a href="inscricao_evento.html" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-3">
-                            Ver Detalhes e Inscrever-se
-                        </a>
-                    </div>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navContent">
+                    <ul class="navbar-nav align-items-center gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="btEntrar" class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="login.html">Entrar/Cadastrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                                Sair
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
-                        <img src="Imagens/Capa_Curso.png" class="object-fit-cover w-100 h-100" alt="Capa do Curso">
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="badge bg-warning bg-opacity-25 text-warning-emphasis rounded-pill">Marketing</span>
-                            <span class="small text-secondary fw-bold"><i class="bi bi-calendar me-1"></i> 15/11</span>
-                        </div>
-                        <h4 class="card-title fw-bold text-dark mb-2">Workshop de Marketing Digital</h4>
-                        <p class="card-text text-secondary small">Estratégias avançadas para crescer nas redes sociais e vender mais.</p>
-                        <a href="inscricao_evento.html" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-3">
-                            Ver Detalhes e Inscrever-se
-                        </a>
-                    </div>
-                </div>
+        </nav>
+        <div class="container pb-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold text-secondary">Explore nossos <span class="text-primary">Cursos e Eventos</span></h1>
+                <p class="text-secondary opacity-75">Oportunidades presenciais e online para alavancar sua carreira</p>
             </div>
-            <div class="col">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
-                        <img src="Imagens/Capa_Curso.png" class="object-fit-cover w-100 h-100" alt="Capa do Curso">
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">Design</span>
-                            <span class="small text-secondary fw-bold"><i class="bi bi-calendar me-1"></i> 20/11</span>
-                        </div>
-                        <h4 class="card-title fw-bold text-dark mb-2">UX/UI Design Bootcamp</h4>
-                        <p class="card-text text-secondary small">Uma imersão completa na criação de interfaces amigáveis e funcionais.</p>
-                        <a href="inscricao_evento.html" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-3">
-                            Ver Detalhes e Inscrever-se
-                        </a>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
+                <button id="filtroTodos" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">Todos</button>
+                <button id="filtroEvento" class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Eventos</button>
+                <button id="filtroCurso" class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Cursos</button>
+                <button id="filtroBootCamp" class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">BootCamp</button>
+                <button id="filtroPalestra" class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Palestras</button>
+                <button id="filtroWorkshop" class="btn btn-light text-secondary rounded-pill px-4 fw-bold border">Workshops</button>
+            </div>
+            <div class="d-flex align-items-center gap-2 justify-content-center flex-wrap mt-3">
+                <label for="filtroModalidade" class="fw-bold text-secondary mb-0">Filtrar Modalidade:</label>
+                <select id="filtroModalidade" class="form-select rounded-pill border-0 text-secondary" style="cursor: pointer; width: auto;">
+                    <option selected>Selecione...</option>
+                    <option value="Online">Online</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Híbrido">Híbrido</option>
+                </select>
             </div>
         </div>
+        <div class="container my-4">
+            <div id="containerCursos" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                <!--Cursos serão inseridos aqui via jQuery-->
+            </div>
+        </div>
+        <br>
     </div>
+    <footer style="background-color: #0d1b8a; height: 75px;">
+        <div class="container text-center">
+            <br>
+            <p style="color: #fff;">Ponte do saber 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let listaCursos = [];
+        let filtroCategoria = "Todos";
+        let filtroModalidade = "";
+
+        //Função para converter a data do banco de dados de AAAA-MM-DD em DD/MM/AAAA no card do curso
+        function formatarData(dataISO) {
+            if (!dataISO) return "";
+
+            const partes = dataISO.split("-");
+            const ano = partes[0];
+            const mes = partes[1];
+            const dia = partes[2];
+
+            return `${dia}/${mes}/${ano}`;
+        };
+
+        // Função para renderizar os cards
+        function renderizarCards(lista) {
+            const containerCursos = $('#containerCursos');
+            containerCursos.empty();
+
+            lista.forEach(function(item){
+                const cardCurso = `
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="ratio ratio-16x9 bg-secondary bg-opacity-10">
+                                <img src="${item.img || 'Imagens/Capa_Curso.png'}" class="object-fit-cover w-100 h-100" alt="Capa do Curso">
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">${item.categoria_Curso}</span>
+                                    <span class="small text-secondary fw-bold">
+                                        <i class="bi bi-calendar me-1"></i>${formatarData(item.data_inicio)}
+                                    </span>
+                                </div>
+                                <h4 class="card-title fw-bold text-dark mb-2">${item.nome_Curso}</h4>
+                                <p class="card-text text-secondary small">${item.descricao}</p>
+                                <a href="inscricao_evento.html?id=${item.id_Curso}" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-3">
+                                    Ver Detalhes e Inscrever-se
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                containerCursos.append(cardCurso);
+            });
+        }
+
+        // Função combinada para filtrar
+        function aplicarFiltros() {
+            let filtrados = listaCursos;
+
+            // Filtra por categoria
+            if(filtroCategoria.toLowerCase() !== "todos") {
+                filtrados = filtrados.filter(item => item.categoria_Curso.toLowerCase() === filtroCategoria.toLowerCase());
+            }
+
+            // Filtra por modalidade
+            if(filtroModalidade !== "" && filtroModalidade !== "Selecione...") {
+                filtrados = filtrados.filter(item => item.modalidade_Curso === filtroModalidade);
+            }
+
+            // Se não houver cursos após o filtro
+            if(filtrados.length === 0){
+                $('#containerCursos').html(`<p class="w-100 text-center text-secondary py-4">
+                    Nenhum curso encontrado para este filtro!
+                </p>`);
+            } else {
+                renderizarCards(filtrados);
+            }
+        }
+
         $(document).ready(function(){
             $('#btLogout').on('click', function(){
                 logout();
+            });
+            $("#filtroEvento").on('click', function(){
+                filtroCategoria = "Evento";
+                aplicarFiltros();
+            });
+            $("#filtroCurso").on('click', function(){
+                filtroCategoria = "Curso";
+                aplicarFiltros();
+            });
+            $("#filtroBootCamp").on('click', function(){
+                filtroCategoria = "BootCamp";
+                aplicarFiltros();
+            });
+            $("#filtroPalestra").on('click', function(){
+                filtroCategoria = "Palestra";
+                aplicarFiltros();
+            });
+            $("#filtroWorkshop").on('click', function(){
+                filtroCategoria = "Workshop";
+                aplicarFiltros();
+            });
+            $("#filtroTodos").on('click', function(){
+                filtroCategoria = "Todos"; 
+                filtroModalidade = ""; 
+                $("#filtroModalidade").val("Selecione...");
+                aplicarFiltros(); 
+            });
+            // Evento do select de modalidade
+            $('#filtroModalidade').on('change', function(){
+                filtroModalidade = $(this).val();
+                aplicarFiltros();
             });
 
             // Recuperar os dados do estudante logado do localStorage
@@ -118,7 +192,33 @@
             } else {
                 $('#btLogout').hide();
             };
+
+            carregarCursos();
         });
+
+        function carregarCursos() {
+            $.ajax({
+                url: 'http://localhost/ProjetoPontedoSaber/API/1/Cursos/',
+                method: 'GET',
+                dataType: 'json',
+
+                success: function(resposta){
+                    if (resposta.erro){
+                        containerCursos.html(`<p class="w-100 text-center text-secondary py-4">Erro ao carregar os dados</p>`);
+                    } else if (resposta.length === 0){
+                        containerCursos.html(`<p class="w-100 text-center text-secondary py-4">Nenhum curso encontrado</p>`);
+                    } else {
+                        listaCursos = resposta.dados.sort((a,b) => new Date(a.data_inicio) - new Date(b.data_inicio));
+                        // Renderiza todos inicialmente
+                        renderizarCards(listaCursos);
+                    }
+                },
+                error: function(erro){
+                    console.log('Erro ao carregar os dados:', erro);
+                    $('#containerCursos').html(`<p class="w-100 text-center text-secondary py-4">Erro de conexão com API</p>`);
+                }
+            });
+        }
 
         function logout() {
             localStorage.removeItem("estudanteLogado");

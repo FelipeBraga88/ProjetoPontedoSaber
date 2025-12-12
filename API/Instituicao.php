@@ -164,6 +164,35 @@ require_once "config.php";
             ];
         }
     }
+
+    //Criar uma função para realizar o login
+    public static function validarLogin( $email, $senha ) {
+        $tabela = "instituicao";
+        $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
+
+        $sql = "SELECT * FROM $tabela WHERE email_Inst = :email_Inst AND senha_Inst = :senha_Inst";
+
+        $stm = $conexao->prepare( $sql );
+        $stm->bindValue(":email_Inst", $email);
+        $stm->bindValue(":senha_Inst", $senha);
+
+        $stm->execute();
+
+        if ( $stm->rowCount() > 0 ) {
+            $valores = $stm->fetch(PDO::FETCH_ASSOC);        
+            return [
+                'erro' => false,
+                'mensagem' => "Login realizado com sucesso!",
+                'dados' => $valores
+            ];
+        } else {
+            return [
+                'erro' => true,
+                'mensagem' => "Email ou senha incorretos!",
+                'dados' => []
+            ];
+        }
+    }
 }
 
 ?>

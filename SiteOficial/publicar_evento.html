@@ -17,11 +17,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navContent">
                 <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item fw-bold text-secondary">Olá, Instituição Parceira</li>
+                    <li id="nomeInst" class="nav-item fw-bold text-secondary me-4">Olá, Instituição</li>
                     <li class="nav-item">
-                        <a href="index.html" class="btn btn-outline-danger rounded-pill px-4 fw-bold border-0">
-                            Sair <i class="bi bi-box-arrow-right ms-2"></i>
-                        </a>
+                        <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                            Sair
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -139,6 +139,19 @@
             $('#btCadastrarEvento').on('click', function(){
                 inserirEvento();
             });
+            $('#btLogout').on('click', function(){
+                logout();
+            });
+            // Recuperar os dados da instituição logada do localStorage
+            const instituicaoLogada = JSON.parse(localStorage.getItem('instituicaoLogada'));
+            console.log(instituicaoLogada);
+
+            if (instituicaoLogada) {
+                $('#nomeInst').text(`Olá, ${instituicaoLogada.razao_Inst}`);
+            } else {
+                // Se não houver instituição logada, redirecionar para a página de login
+                window.location.href = 'login.html';
+            }
         });
 
         //Mostrar erros da validação
@@ -263,6 +276,11 @@
                     console.log('Erro na requisição:', erro);
                 }
             });
+        };
+
+        function logout() {
+            localStorage.removeItem("instituicaoLogada");
+            window.location.href = "index.html";
         };
     </script>
 </body>

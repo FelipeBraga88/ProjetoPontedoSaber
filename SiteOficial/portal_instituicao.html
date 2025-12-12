@@ -6,9 +6,9 @@
     <title>Portal da Instituição - Ponte do Saber</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body class="bg-light">
-
     <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
         <div class="container">
             <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
@@ -17,17 +17,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navContent">
                 <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item fw-bold text-secondary">Olá, Instituição Parceira</li>
+                    <li id="nomeInst" class="nav-item fw-bold text-secondary me-4">Olá, Instituição</li>
                     <li class="nav-item">
-                        <a href="index.html" class="btn btn-outline-danger rounded-pill px-4 fw-bold border-0">
-                            Sair <i class="bi bi-box-arrow-right ms-2"></i>
-                        </a>
+                        <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                            Sair
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container pb-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -159,5 +158,27 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+         $(document).ready(function(){
+            $('#btLogout').on('click', function(){
+                logout();
+            });
+            // Recuperar os dados da instituição logada do localStorage
+            const instituicaoLogada = JSON.parse(localStorage.getItem('instituicaoLogada'));
+            console.log(instituicaoLogada);
+
+            if (instituicaoLogada) {
+                $('#nomeInst').text(`Olá, ${instituicaoLogada.razao_Inst}`);
+            } else {
+                // Se não houver instituição logada, redirecionar para a página de login
+                window.location.href = 'login.html';
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem("instituicaoLogada");
+            window.location.href = "index.html";
+        };
+    </script>
 </body>
 </html>

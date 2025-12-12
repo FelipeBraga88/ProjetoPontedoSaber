@@ -37,6 +37,16 @@
                             <h3 class="fw-bold text-primary">Acesse sua conta</h3>
                             <p class="text-secondary small">Estudantes e Instituições parceiras</p>
                         </div>
+                        <div class="d-flex flex-row h-150 justify-content-center mb-3">
+                            <div class="form-check me-4">
+                                <input id="rdEstud" class="form-check-input" type="radio" name="radioDefault" checked>
+                                <label for="rdEstud" class="form-check-label">Estudante</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="rdInst" class="form-check-input" type="radio" name="radioDefault">
+                                <label for="rdInst" class="form-check-label">Instituição</label>
+                            </div>
+                        </div>
                         <div id="alertaLogin"></div>
                         <form id="loginForm">
                             <div class="mb-3">
@@ -125,10 +135,11 @@
                 return;
             }
 
-            const dadosLogin = {
-                email_Estd: $('#email_Login').val(),
-                senha_Estd: $('#senha_Login').val(),
-            };
+            const tipoUsuario = $('#rdEstud').is(':checked') ? 'estudante' : 'instituicao';
+
+            const dadosLogin = tipoUsuario === 'estudante' 
+                ? { email_Estd: email, senha_Estd: senha, tipo: 'estudante' }
+                : { email_Inst: email, senha_Inst: senha, tipo: 'instituicao' };
 
             $.ajax({
                 url: 'http://localhost/ProjetoPontedoSaber/API/1/login',
@@ -150,13 +161,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
                         //Salvar os dados do estudante na sessão
-                        localStorage.setItem('estudanteLogado', JSON.stringify(resposta.dados));
-                        //Limpar o formulário
-                        $('#loginForm')[0].reset();
-                        //Redirecionar para a página inicial após 1 segundos
-                        setTimeout(function(){
-                            window.location.href = 'index.html';
-                        }, 500);
+                        if(tipoUsuario === 'estudante'){
+                            localStorage.setItem('estudanteLogado', JSON.stringify(resposta.dados));
+                            $('#loginForm')[0].reset();
+                            setTimeout(() => { window.location.href = 'index.html'; }, 500);
+                        } else {
+                            localStorage.setItem('instituicaoLogada', JSON.stringify(resposta.dados));
+                            $('#loginForm')[0].reset();
+                            setTimeout(() => { window.location.href = 'portal_instituicao.html'; }, 500);
+                        }
                     }
                     $('#alertaLogin').html(alerta);
                 },
@@ -166,23 +179,6 @@
                 }
             });
         };
-        /* Função para logout usar em outras paginas:
-        function logout() {
-            localStorage.removeItem("estudanteLogado");
-            window.location.href = "login.html";
-        }
-        Recuperar dados do estudante logado:
-        function getEstudanteLogado() {
-            const estudanteJSON = localStorage.getItem("estudanteLogado");
-            return estudanteJSON ? JSON.parse(estudanteJSON) : null;
-        }
-            ou a de cima ou a de baixo, verificar depois
-            const usuario = JSON.parse(localStorage.getItem("estudanteLogado"));
-
-            Exibir o nome do usuário na página
-            document.getElementById("nomeUsuario").textContent = usuario.nome_Estd;
-        */
-
     </script>
 </body>
 </html>

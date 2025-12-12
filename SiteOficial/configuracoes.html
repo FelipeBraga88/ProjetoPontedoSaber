@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Ponte do Saber</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-expand-lg bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary fs-3" href="#">Ponte do Saber</a>        
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-center gap-3">
+                        <li id="nomeEstudante" class="nav-item fs-4 fw-bold text-uppercase text-secondary me-4">Olá, Estudante!</li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="portal_instituicao.html">Empresa</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btConfig" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">
+                                Config
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                                Sair
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container my-4">   
+            <div class="p-5 text-center rounded-5 text-white mb-5" 
+                style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">   
+                <h1 class="display-4 fw-bold mb-3">Ponte do Saber</h1>
+                <p class="fs-5 fw-bold text-warning mb-4">Conectando o conhecimento gratuito ao seu futuro</p>
+            </div>
+            <br>
+        </div>
+    </div>
+    <footer style="background-color: #0d1b8a; height: 75px;">
+        <div class="container text-center">
+            <br>
+            <p style="color: #fff;">Ponte do saber 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btLogout').on('click', function(){
+                logout();
+            });
+            $('#btConfig').on('click', function(){
+                window.location.href = "configuracoes.html";
+            });
+            // Recuperar os dados do estudante logado do localStorage
+            const estudanteLogado = JSON.parse(localStorage.getItem('estudanteLogado'));
+            console.log(estudanteLogado);
+
+            if (estudanteLogado) {
+                $('#nomeEstudante').text(`Olá, ${estudanteLogado.nome_Estd}!`);
+            } else {
+                // Se não houver instituição logada, redirecionar para a página de login
+                window.location.href = 'login.html';
+            };
+        });
+
+        function logout() {
+            localStorage.removeItem("estudanteLogado");
+            window.location.href = "index.html";
+        };
+    </script>
+</body>
+</html>
