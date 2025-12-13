@@ -42,13 +42,66 @@
                 </div>
             </div>
         </nav>
-        <div class="container my-4">   
-            <div class="p-5 text-center rounded-5 text-white mb-5" 
-                style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">   
-                <h1 class="display-4 fw-bold mb-3">Ponte do Saber</h1>
-                <p class="fs-5 fw-bold text-warning mb-4">Conectando o conhecimento gratuito ao seu futuro</p>
+        <div class="container pb-5">
+            <div class="p-5 rounded-top-5 text-white position-relative overflow-hidden mb-0" 
+                style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="display-6 fw-bold mb-2">Configurações</h2>
+                        <p class="opacity-75 fs-5">Altere ou exclua seus dados pessoais.</p>
+                    </div>
+                    <div class="col-md-4 text-center d-none d-md-block">
+                        <i class="bi bi-person-fill-gear display-1 opacity-50"></i>
+                    </div>
+                </div>
             </div>
-            <br>
+            <div class="bg-secondary bg-opacity-10 p-4 p-md-5 rounded-bottom-5">
+                <!--Div para alerta dos erros do form-->
+                <div id="alertaConfig"></div>
+                    <form>
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-8">
+                                <label for="nome_Estd" class="fw-bold text-secondary">Nome</label>
+                                <input type="text" id="nome_Estd" class="form-control rounded-pill p-2 border-0 mb-3">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <label for="cpf" class="fw-bold text-secondary">CPF</label>
+                                        <input type="text" id="cpf" class="form-control rounded-pill p-2 border-0 mb-3">
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="telefone_Estd" class="fw-bold text-secondary">Celular</label>
+                                        <input type="text" id="telefone_Estd" class="form-control rounded-pill p-2 border-0 mb-3">
+                                    </div>
+                                </div>
+                                <label for="email_Estd" class="fw-bold text-secondary">E-mail</label>
+                                <input type="email" id="email_Estd" class="form-control rounded-pill p-2 border-0 mb-3">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <label for="senha_Estd" class="fw-bold text-secondary">Senha</label>
+                                        <input type="password" id="senha_Estd" class="form-control rounded-pill p-2 border-0">
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="idade_Estd" class="fw-bold text-secondary">Idade</label>
+                                        <input type="number" id="idade_Estd" class="form-control rounded-pill p-2 border-0">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Depois remover este campo de upload de imagem -->
+                            <div class="col-md-4">
+                                <div class="bg-white rounded-4 h-100 d-flex flex-column align-items-center justify-content-center p-3 text-secondary text-center">
+                                    <i class="bi bi-image fs-1 mb-2"></i>
+                                    <small class="fw-bold">Selecionar arquivo</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-center align-items-center">
+                            <button type="button" id="btSalvarEstudante" class="btn btn-warning fw-bold px-5 py-2 me-5 rounded-pill shadow">ALTERAR</button>
+                            <button type="button" id="btSalvarEstudante" class="btn btn-danger fw-bold px-5 py-2 rounded-pill shadow">EXCLUIR</button>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <footer style="background-color: #0d1b8a; height: 75px;">
@@ -73,11 +126,27 @@
 
             if (estudanteLogado) {
                 $('#nomeEstudante').text(`Olá, ${estudanteLogado.nome_Estd}!`);
+                $('#nome_Estd').val(estudanteLogado.nome_Estd);
+                $('#cpf').val(estudanteLogado.cpf);
+                $('#telefone_Estd').val(estudanteLogado.telefone_Estd);
+                $('#email_Estd').val(estudanteLogado.email_Estd);
+                $('#senha_Estd').val(estudanteLogado.senha_Estd);
+                $('#idade_Estd').val(estudanteLogado.idade_Estd);
             } else {
                 // Se não houver instituição logada, redirecionar para a página de login
                 window.location.href = 'login.html';
             };
         });
+
+        //Mostrar erros da validação
+        function mostrarErro(mensagem) {
+            $('#alertaConfig').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `);
+        }
 
         function logout() {
             localStorage.removeItem("estudanteLogado");

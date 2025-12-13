@@ -8,110 +8,118 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg bg-white py-3 mb-3">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary fs-3" href="#">Ponte do Saber</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navContent">
-                <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item"><a class="nav-link text-dark fw-medium" href="index.html">Início</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a></li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="#">Entrar/Cadastrar</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container pb-5">        
-        <div class="p-5 rounded-top-5 text-white position-relative overflow-hidden" 
-             style="background: linear-gradient(135deg, #4a69bd, #0d1b8a); min-height: 300px;">
-            <div class="row align-items-center">
-                <div class="col-md-7">
-                    <h2 class="display-6 fw-bold mb-3">Divulgue aqui seus <span class="text-warning">cursos e eventos</span> e veja suas inscrições subirem!</h2>
-                    <a href="login.html" class="btn btn-warning text-white fw-bold btn-lg mt-3 shadow">
-                        Conecte-se
-                    </a>
-                </div>
-                <div class="col-md-5 text-center">
-                    <img src="Imagens/imagem_homem_seta.png" alt="Imagem de Instituição" class="img-fluid opacity-100" style="max-height: 350px;">
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-expand-lg bg-white py-3 mb-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary fs-3" href="#">Ponte do Saber</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navContent">
+                    <ul class="navbar-nav align-items-center gap-3">
+                        <li class="nav-item"><a class="nav-link text-dark fw-medium" href="index.html">Início</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a></li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary rounded-pill px-4 fw-bold" style="background-color: #0d1b8a; border: none;" href="#">Entrar/Cadastrar</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <div class="bg-secondary bg-opacity-25 p-2">
-            <div class="row g-0">
-                <div class="col-6">
-                    <a href="cadastro_estudante.html" class="btn btn-secondary w-100 bg-opacity-50 text-white fw-bold fs-5 rounded-end-0 border-0 text-decoration-none">
-                        Sou Estudante
-                    </a>
-                </div>
-                <div class="col-6">
-                    <div class="btn btn-warning w-100 text-white fw-bold fs-5 rounded-start-0" style="cursor: default;">
-                        Sou Instituição
+        </nav>
+        <div class="container pb-5">        
+            <div class="p-5 rounded-top-5 text-white position-relative overflow-hidden" 
+                style="background: linear-gradient(135deg, #4a69bd, #0d1b8a); min-height: 300px;">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <h2 class="display-6 fw-bold mb-3">Divulgue aqui seus <span class="text-warning">cursos e eventos</span> e veja suas inscrições subirem!</h2>
+                        <a href="login.html" class="btn btn-warning text-white fw-bold btn-lg mt-3 shadow">
+                            Conecte-se
+                        </a>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <img src="Imagens/imagem_homem_seta.png" alt="Imagem de Instituição" class="img-fluid opacity-100" style="max-height: 350px;">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="bg-secondary bg-opacity-10 p-5 rounded-bottom-5">
-            <!--Div para alerta dos erros do form-->
-            <div id="alertaInstituicao"></div>
-            <form action="portal_instituicao.html">
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <label class="fw-bold text-secondary mb-2">Seu Logo</label>
-                        <div class="bg-white rounded-4 h-75 d-flex flex-column align-items-center justify-content-center p-3 text-secondary text-center">
-                            <i class="bi bi-image fs-1 mb-2"></i>
-                            <small class="fw-bold">Selecionar arquivo</small>
-                        </div>
+            <div class="bg-secondary bg-opacity-25 p-2">
+                <div class="row g-0">
+                    <div class="col-6">
+                        <a href="cadastro_estudante.html" class="btn btn-secondary w-100 bg-opacity-50 text-white fw-bold fs-5 rounded-end-0 border-0 text-decoration-none">
+                            Sou Estudante
+                        </a>
                     </div>
-                    <div class="col-md-8">
-                        <label for="razao_Inst" class="fw-bold text-secondary">Nome da Instituição</label>
-                        <input type="text" id="razao_Inst" class="form-control rounded-pill p-2 border-0 mb-3">
-                        <div class="row mb-3">
-                            <div class="col-10">
-                                <label for="endereco_Inst" class="fw-bold text-secondary">Endereço</label>
-                                <input type="text" id="endereco_Inst" class="form-control rounded-pill p-2 border-0">
-                            </div>
-                            <div class="col-2">
-                                <label for="num_end_Inst" class="fw-bold text-secondary">Número</label>
-                                <input type="text" id="num_end_Inst" class="form-control rounded-pill p-2 border-0">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="cnpj" class="fw-bold text-secondary">CNPJ</label>
-                                <input type="text" id="cnpj" class="form-control rounded-pill p-2 border-0">
-                            </div>
-                            <div class="col-6">
-                                <label for="telefone_Inst" class="fw-bold text-secondary">Celular</label>
-                                <input type="text" id="telefone_Inst" class="form-control rounded-pill p-2 border-0">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="email_Inst" class="fw-bold text-secondary">E-mail</label>
-                                <input type="email" id="email_Inst" class="form-control rounded-pill p-2 border-0">
-                            </div>
-                            <div class="col-6">
-                                <label for="senha_Inst" class="fw-bold text-secondary">Senha</label>
-                                <input type="password" id="senha_Inst" class="form-control rounded-pill p-2 border-0">
-                            </div>
+                    <div class="col-6">
+                        <div class="btn btn-warning w-100 text-white fw-bold fs-5 rounded-start-0" style="cursor: default;">
+                            Sou Instituição
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 d-flex justify-content-end align-items-center gap-3">
-                    <div class="form-check">
-                        <input id="termosInstituicao" class="form-check-input" type="checkbox">
-                        <label for="termosInstituicao" class="form-check-label small fw-bold text-secondary">Aceito os Termos de uso</label>
+            </div>
+            <div class="bg-secondary bg-opacity-10 p-5 rounded-bottom-5">
+                <!--Div para alerta dos erros do form-->
+                <div id="alertaInstituicao"></div>
+                <form action="portal_instituicao.html">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <label class="fw-bold text-secondary mb-2">Seu Logo</label>
+                            <div class="bg-white rounded-4 h-75 d-flex flex-column align-items-center justify-content-center p-3 text-secondary text-center">
+                                <i class="bi bi-image fs-1 mb-2"></i>
+                                <small class="fw-bold">Selecionar arquivo</small>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="razao_Inst" class="fw-bold text-secondary">Nome da Instituição</label>
+                            <input type="text" id="razao_Inst" class="form-control rounded-pill p-2 border-0 mb-3">
+                            <div class="row mb-3">
+                                <div class="col-10">
+                                    <label for="endereco_Inst" class="fw-bold text-secondary">Endereço</label>
+                                    <input type="text" id="endereco_Inst" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                                <div class="col-2">
+                                    <label for="num_end_Inst" class="fw-bold text-secondary">Número</label>
+                                    <input type="text" id="num_end_Inst" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="cnpj" class="fw-bold text-secondary">CNPJ</label>
+                                    <input type="text" id="cnpj" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                                <div class="col-6">
+                                    <label for="telefone_Inst" class="fw-bold text-secondary">Celular</label>
+                                    <input type="text" id="telefone_Inst" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="email_Inst" class="fw-bold text-secondary">E-mail</label>
+                                    <input type="email" id="email_Inst" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                                <div class="col-6">
+                                    <label for="senha_Inst" class="fw-bold text-secondary">Senha</label>
+                                    <input type="password" id="senha_Inst" class="form-control rounded-pill p-2 border-0">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" id="btSalvarInstituicao" class="btn btn-success fw-bold px-5 py-2 rounded-pill shadow">INSCREVER-SE</button>
-                </div>
-            </form>
+                    <div class="mt-4 d-flex justify-content-end align-items-center gap-3">
+                        <div class="form-check">
+                            <input id="termosInstituicao" class="form-check-input" type="checkbox">
+                            <label for="termosInstituicao" class="form-check-label small fw-bold text-secondary">Aceito os Termos de uso</label>
+                        </div>
+                        <button type="button" id="btSalvarInstituicao" class="btn btn-success fw-bold px-5 py-2 rounded-pill shadow">INSCREVER-SE</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <footer style="background-color: #0d1b8a; height: 75px;">
+        <div class="container text-center">
+            <br>
+            <p style="color: #fff;">Ponte do saber 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>

@@ -8,149 +8,157 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navContent">
-                <ul class="navbar-nav align-items-center gap-3">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-medium" href="index.html">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark fw-medium" href="portal_instituicao.html">Empresa</a>
-                    </li>
-                    <li class="nav-item">
-                        <button id="btConfig" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">
-                            Config
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
-                            Sair
-                        </button>
-                    </li>                    
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container pb-5">
-        <div class="p-4 rounded-4 text-white mb-4" style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
-            <h2 id="trazer_nomeCurso" class="fw-bold mb-3">Nome do curso...</h2>
-            <div id="alertaCursoInscricao"></div>
-            <div class="row g-4">
-                <div class="col-lg-7">
-                    <div class="bg-secondary bg-opacity-10 rounded-4 w-100 h-100 overflow-hidden" style="min-height: 300px;">
-                        <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Capa do Curso">
-                    </div>
-                </div>
-                <div class="col-lg-5">                    
-                    <label for="trazer_descricao" class="fw-bold mb-1">Descrição</label>
-                    <div id="trazer_descricao" class="bg-white bg-opacity-75 text-dark rounded-3 p-2 mb-4" style="min-height: 120px; font-size: 0.9rem;">
-                        Descrição do evento...
-                    </div>
-                    <label for="trazer_dataCurso" class="fw-bold mb-1">Início do Curso:</label>
-                    <div id="trazer_dataCurso" class="text-white fs-4 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
-                        DD/MM/AAAA
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <label for="trazer_vagas" class="fw-bold small mb-1 w-100 text-center">Vagas abertas:</label>
-                            <div id="trazer_vagas" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
-                                0
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label for="trazer_duracao" class="fw-bold small mb-1 w-100 text-center">Duração:</label>
-                            <div id="trazer_duracao" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
-                                0 horas
-                            </div>
-                        </div>
-                    </div>
-                    <label for="trazer_endereco" class="fw-bold small mb-1 w-100 text-center">Localização:</label>
-                    <div id="trazer_endereco" class="text-white fs-5 fw-bold text-center py-1 rounded-3 shadow-sm" style="background-color: #f39c12;">
-                        Sem endereço.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bg-secondary bg-opacity-25 p-4 rounded-4 mb-5">
-            <h4 class="fw-bold text-warning mb-5">INSCRIÇÃO</h4>
-            <div id="alertaInscricao"></div>
-            <form action="index.html">
-                <div class="row g-3 mb-5">
-                    <div class="col-md-7">
-                        <label for="nome_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Nome:</label>
-                        <input id="nome_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cpf_Inscricao" class="fw-bold text-secondary ps-2 mb-1">CPF:</label>
-                        <input id="cpf_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                    <div class="col-md-1">
-                        <label for="idade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Idade:</label>
-                        <input id="idade_Inscricao" type="number" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                </div>
-                <div class="row g-3 mb-5">
-                    <div class="col-md-6">
-                        <label for="email_Inscricao" class="fw-bold text-secondary ps-2 mb-1">E-mail:</label>
-                        <input id="email_Inscricao" type="email" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="telefone_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Telefone:</label>
-                        <input id="telefone_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="modalidade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Modalidade:</label>
-                        <input id="modalidade_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
-                    </div>
-                </div>
-                <br>
-                <div class="row g-3 align-items-end">                                      
-                    <div class="col-md-8">
-                        <div class="d-flex flex-wrap justify-content-end align-items-center gap-4">
-                            <div class="form-check">
-                                <input class="form-check-input p-2" type="checkbox" id="termosInscricao" value="">
-                                <label class="form-check-label small fw-bold text-secondary" for="termosInscricao">
-                                    Aceito os <a href="#" class="text-primary text-decoration-none">Termos de uso</a>
-                                </label>
-                            </div>
-                            <button type="button" id="btInscricao" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow text-uppercase" 
-                                    style="background-color: #58d613; border: none; min-width: 200px; color: #1a4d03;">
-                                Inscrever
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-expand-lg bg-white py-3 mb-4">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary fs-3" href="index.html">Ponte do Saber</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navContent">
+                    <ul class="navbar-nav align-items-center gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="cursos.html">Cursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-medium" href="portal_instituicao.html">Empresa</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btConfig" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">
+                                Config
                             </button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btLogout" class="btn btn-danger rounded-pill px-4 fw-bold">
+                                Sair
+                            </button>
+                        </li>                    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container pb-5">
+            <div class="p-4 rounded-4 text-white mb-4" style="background: linear-gradient(135deg, #4a69bd, #0d1b8a);">
+                <h2 id="trazer_nomeCurso" class="fw-bold mb-3">Nome do curso...</h2>
+                <div id="alertaCursoInscricao"></div>
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="bg-secondary bg-opacity-10 rounded-4 w-100 h-100 overflow-hidden" style="min-height: 300px;">
+                            <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Capa do Curso">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">                    
+                        <label for="trazer_descricao" class="fw-bold mb-1">Descrição</label>
+                        <div id="trazer_descricao" class="bg-white bg-opacity-75 text-dark rounded-3 p-2 mb-4" style="min-height: 120px; font-size: 0.9rem;">
+                            Descrição do evento...
+                        </div>
+                        <label for="trazer_dataCurso" class="fw-bold mb-1">Início do Curso:</label>
+                        <div id="trazer_dataCurso" class="text-white fs-4 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                            DD/MM/AAAA
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <label for="trazer_vagas" class="fw-bold small mb-1 w-100 text-center">Vagas abertas:</label>
+                                <div id="trazer_vagas" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                                    0
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="trazer_duracao" class="fw-bold small mb-1 w-100 text-center">Duração:</label>
+                                <div id="trazer_duracao" class="text-white fs-5 fw-bold text-center py-1 rounded-3 mb-2 shadow-sm" style="background-color: #f39c12;">
+                                    0 horas
+                                </div>
+                            </div>
+                        </div>
+                        <label for="trazer_endereco" class="fw-bold small mb-1 w-100 text-center">Localização:</label>
+                        <div id="trazer_endereco" class="text-white fs-5 fw-bold text-center py-1 rounded-3 shadow-sm" style="background-color: #f39c12;">
+                            Sem endereço.
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-        <h5 class="fw-bold text-secondary mb-3">Veja outros cursos</h5>
-        <div class="row g-3">
-            <div class="col-md-4">
-                <div class="bg-secondary bg-opacity-10 rounded-4 w-100 overflow-hidden" style="height: 150px;">
-                     <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Outro curso">
-                </div>
             </div>
-            <div class="col-md-4">
-                <div class="bg-secondary bg-opacity-10 rounded-4 w-100 overflow-hidden" style="height: 150px;">
-                    <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Outro curso">
-                </div>
+            <div class="bg-secondary bg-opacity-25 p-4 rounded-4 mb-5">
+                <h4 class="fw-bold text-warning mb-5">INSCRIÇÃO</h4>
+                <div id="alertaInscricao"></div>
+                <form action="index.html">
+                    <div class="row g-3 mb-5">
+                        <div class="col-md-7">
+                            <label for="nome_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Nome:</label>
+                            <input id="nome_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cpf_Inscricao" class="fw-bold text-secondary ps-2 mb-1">CPF:</label>
+                            <input id="cpf_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                        <div class="col-md-1">
+                            <label for="idade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Idade:</label>
+                            <input id="idade_Inscricao" type="number" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-5">
+                        <div class="col-md-6">
+                            <label for="email_Inscricao" class="fw-bold text-secondary ps-2 mb-1">E-mail:</label>
+                            <input id="email_Inscricao" type="email" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="telefone_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Telefone:</label>
+                            <input id="telefone_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="modalidade_Inscricao" class="fw-bold text-secondary ps-2 mb-1">Modalidade:</label>
+                            <input id="modalidade_Inscricao" type="text" class="form-control rounded-pill p-2 border-0" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row g-3 align-items-end">                                      
+                        <div class="col-md-8">
+                            <div class="d-flex flex-wrap justify-content-end align-items-center gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input p-2" type="checkbox" id="termosInscricao" value="">
+                                    <label class="form-check-label small fw-bold text-secondary" for="termosInscricao">
+                                        Aceito os <a href="#" class="text-primary text-decoration-none">Termos de uso</a>
+                                    </label>
+                                </div>
+                                <button type="button" id="btInscricao" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow text-uppercase" 
+                                        style="background-color: #58d613; border: none; min-width: 200px; color: #1a4d03;">
+                                    Inscrever
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-4">
-                <a href="cursos.html" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold fs-4 text-decoration-none" 
-                     style="height: 150px; background-color: #0d1b8a;">
-                    <span class="writing-mode-vertical">Ver Mais +</span>
-                </a>
+            <h5 class="fw-bold text-secondary mb-3">Veja outros cursos</h5>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="bg-secondary bg-opacity-10 rounded-4 w-100 overflow-hidden" style="height: 150px;">
+                        <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Outro curso">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-secondary bg-opacity-10 rounded-4 w-100 overflow-hidden" style="height: 150px;">
+                        <img src="Imagens/Capa_Curso.png" class="w-100 h-100 object-fit-cover" alt="Outro curso">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="cursos.html" class="rounded-4 w-100 d-flex align-items-center justify-content-center text-white fw-bold fs-4 text-decoration-none" 
+                        style="height: 150px; background-color: #0d1b8a;">
+                        <span class="writing-mode-vertical">Ver Mais +</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+    <footer style="background-color: #0d1b8a; height: 75px;">
+        <div class="container text-center">
+            <br>
+            <p style="color: #fff;">Ponte do saber 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let cursoId = null; // Variável para armazenar o ID do curso globalmente
