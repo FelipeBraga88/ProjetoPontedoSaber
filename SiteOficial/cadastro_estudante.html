@@ -247,6 +247,7 @@
                         </div>`;
                         // Limpar o formulário após sucesso
                         $('form')[0].reset();
+                        setTimeout(() => { window.location.href = 'login.html'; }, 1500);
                     }
                     $('#alertaEstudante').html(alerta);
                 },
