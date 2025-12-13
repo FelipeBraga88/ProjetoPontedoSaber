@@ -101,7 +101,7 @@ class Estudante { //Criação dos métodos para manipulação do banco de dados
         $tabela = "estudante";
         $conexao = new PDO( dbDrive . ":host=" . dbEndereco . ";dbname=" . dbNome, dbUsuario, dbSenha );
 
-        $sql = "UPDATE $tabela SET nome_Estd = :nome_Estd, idade_Estd = :idade_Estd, email_Estd = :email_Estd, telefone_Estd = :telefone_Estd, cep_Estd = :cep_Estd, endereco_Estd = :endereco_Estd, num_end_Estd = :num_end_Estd, cidade_Estd = :cidade_Estd, estado_Estd = :estado_Estd, pais_Estd = :pais_Estd, senha_Estd = :senha_Estd, data_cad_Estd = :data_cad_Estd WHERE cpf = :cpf";
+        $sql = "UPDATE $tabela SET nome_Estd = :nome_Estd, idade_Estd = :idade_Estd, email_Estd = :email_Estd, telefone_Estd = :telefone_Estd, /*cep_Estd = :cep_Estd,*/ endereco_Estd = :endereco_Estd, num_end_Estd = :num_end_Estd, cidade_Estd = :cidade_Estd, estado_Estd = :estado_Estd, pais_Estd = :pais_Estd, senha_Estd = :senha_Estd/*, data_cad_Estd = :data_cad_Estd*/ WHERE cpf = :cpf";
 
         //Trocar o apelido pela informação
         $stm = $conexao->prepare($sql);
@@ -109,14 +109,14 @@ class Estudante { //Criação dos métodos para manipulação do banco de dados
         $stm->bindValue(":idade_Estd", $dados["idade_Estd"]);
         $stm->bindValue(":email_Estd", $dados["email_Estd"]);
         $stm->bindValue(":telefone_Estd", $dados["telefone_Estd"]);
-        $stm->bindValue(":cep_Estd", $dados["cep_Estd"]);
+        //$stm->bindValue(":cep_Estd", $dados["cep_Estd"]);
         $stm->bindValue(":endereco_Estd", $dados["endereco_Estd"]);
         $stm->bindValue(":num_end_Estd", $dados["num_end_Estd"]);
         $stm->bindValue(":cidade_Estd", $dados["cidade_Estd"]);
         $stm->bindValue(":estado_Estd", $dados["estado_Estd"]);
         $stm->bindValue(":pais_Estd", $dados["pais_Estd"]);
         $stm->bindValue(":senha_Estd", $dados["senha_Estd"]);
-        $stm->bindValue(":data_cad_Estd", $dados["data_cad_Estd"]);
+        //$stm->bindValue(":data_cad_Estd", $dados["data_cad_Estd"]);
         $stm->bindValue(":cpf", $cpf);
         
         $stm->execute();
